@@ -17,7 +17,7 @@ module.exports = {
 
   // Platform specific configs for API
   api: {
-    storeId: "newstore",
+    storeId: "latamlab13",
     workspace: "master",
     environment: "vtexcommercestable",
     hideUnavailableItems: true,
@@ -97,6 +97,6 @@ module.exports = {
   },
 
   vtexHeadlessCms: {
-    webhookUrls: ["https://newstore.myvtex.com/cms-releases/webhook-releases"],
+    webhookUrls: ["https://latamlab13.myvtex.com/cms-releases/webhook-releases"],
   },
 };
