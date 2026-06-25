@@ -1,6 +1,7 @@
 module.exports = {
   contentSource: {
     type: 'CP',
+    project: "latamlab13",
   },
   seo: {
     title: "FastStore",
@@ -30,7 +31,7 @@ module.exports = {
       code: "BRL",
       symbol: "R$",
     },
-    locale: "pt-BR",
+    locale: "es-AR",
     channel: '{"salesChannel":"1","regionId":""}',
     country: "BRA",
     deliveryMode: null,
