@@ -1,0 +1,9 @@
+extend type StoreProduct {
+  commercialTags: [String]
+  productGroups: [ProductGroup]
+}
+
+type ProductGroup {
+  id: String
+  name: String
+}

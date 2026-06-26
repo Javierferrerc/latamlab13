@@ -1,0 +1,9 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "ProductExtraInfo",
+  "$componentTitle": "Product Extra Info",
+  "title": "Product Extra Info",
+  "description": "Bloque de PDP que consume campos extendidos del producto (commercialTags, productGroups) resueltos en la capa GraphQL/BFF.",
+  "type": "object",
+  "properties": {}
+}
