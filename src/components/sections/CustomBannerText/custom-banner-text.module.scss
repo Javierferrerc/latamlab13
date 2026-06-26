@@ -1,0 +1,32 @@
+@use "@faststore/ui/src/styles/base/utilities" as u;
+
+.badgeWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: var(--fs-spacing-3);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fs-spacing-1);
+  padding: var(--fs-spacing-1) var(--fs-spacing-4);
+  background-color: var(--fs-color-main-2);
+  border-radius: var(--fs-border-radius);
+  font-family: var(--fs-text-face-body);
+}
+
+.badgeIcon {
+  font-size: var(--fs-text-size-3);
+  line-height: 1;
+}
+
+.badgeText {
+  color: var(--fs-color-text-inverse);
+  font-size: var(--fs-text-size-1);
+  font-weight: var(--fs-text-weight-black);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
