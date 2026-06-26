@@ -1,0 +1,13 @@
+diff --git a/node_modules/@faststore/cli/dist/index.js b/node_modules/@faststore/cli/dist/index.js
+index 7819cf5..b53b9c8 100644
+--- a/node_modules/@faststore/cli/dist/index.js
++++ b/node_modules/@faststore/cli/dist/index.js
+@@ -1706,7 +1706,7 @@ async function getTypeDefsFromFolder(root, customPath) {
+   const globby = await import("globby");
+   const basePath = [root, "src", "graphql"];
+   const pathArray = Array.isArray(customPath) ? customPath : [customPath];
+-  return (globby.default ?? globby).globbySync(path10.join(...[...basePath, ...pathArray]), {
++  return (globby.default ?? globby).globbySync(path10.join(...[...basePath, ...pathArray]).split(path10.sep).join("/"), {
+     expandDirectories: {
+       extensions: ["graphql"]
+     }
