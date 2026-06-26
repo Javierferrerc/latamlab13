@@ -1,33 +1,15 @@
-type ProductSource = {
-  id?: string
-  productID?: string
-}
-
-const getProductId = (product: ProductSource) => {
-  return product.productID ?? product.id ?? ""
-}
-
+// Nota: el objeto `product` (root) que recibe el field resolver de StoreProduct
+// en esta versión no expone el id con un nombre estable (`productId`/`productID`/
+// `id` vienen undefined), por eso no se usa un guard por id. En una implementación
+// real se usaría el identificador del producto para consultar la fuente autorizada
+// (Catalog, Master Data, VBase o una API server-side). Para la guía se devuelven
+// valores fijos de ejemplo para mostrar el patrón.
 const resolvers = {
   StoreProduct: {
-    commercialTags: async (product: ProductSource) => {
-      const productId = getProductId(product)
-
-      if (!productId) {
-        return []
-      }
-
-      // Consultar aquí la fuente real de datos (Catalog, Master Data, VBase o
-      // una API server-side). Por ahora se devuelven valores fijos de ejemplo.
+    commercialTags: async () => {
       return ["Nuevo", "Destacado"]
     },
-    productGroups: async (product: ProductSource) => {
-      const productId = getProductId(product)
-
-      if (!productId) {
-        return []
-      }
-
-      // Consultar aquí la fuente real de datos.
+    productGroups: async () => {
       return [
         { id: "100", name: "Temporada" },
         { id: "200", name: "Promoción" },
