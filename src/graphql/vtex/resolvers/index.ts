@@ -1,10 +1,13 @@
 type ProductSource = {
   id?: string
   productID?: string
+  // En la plataforma VTEX el producto que recibe el resolver expone el id como
+  // `productId` (d minúscula), no `productID`/`id` como en la guía 4.2.
+  productId?: string
 }
 
 const getProductId = (product: ProductSource) => {
-  return product.productID ?? product.id ?? ""
+  return product.productId ?? product.productID ?? product.id ?? ""
 }
 
 const resolvers = {
