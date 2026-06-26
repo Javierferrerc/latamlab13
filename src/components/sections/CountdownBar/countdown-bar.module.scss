@@ -1,0 +1,93 @@
+@use "@faststore/ui/src/styles/base/utilities" as u;
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fs-spacing-4);
+  width: 100%;
+  height: var(--fs-spacing-9);
+  background-color: var(--fs-color-neutral-8);
+  border-bottom: var(--fs-border-width) solid var(--fs-color-main-2);
+  padding: 0 var(--fs-grid-padding);
+  box-sizing: border-box;
+}
+
+.label {
+  color: var(--fs-color-text-inverse);
+  font-family: var(--fs-text-face-body);
+  font-size: var(--fs-text-size-2);
+  font-weight: var(--fs-text-weight-bold);
+  white-space: nowrap;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: var(--fs-spacing-1);
+}
+
+.unit {
+  display: flex;
+  align-items: baseline;
+  gap: var(--fs-spacing-0);
+}
+
+.number {
+  display: inline-block;
+  min-width: var(--fs-spacing-6);
+  padding: var(--fs-spacing-0) var(--fs-spacing-2);
+  background-color: var(--fs-color-main-2);
+  color: var(--fs-color-text-inverse);
+  font-family: "Courier New", Courier, monospace;
+  font-size: var(--fs-text-size-2);
+  font-weight: var(--fs-text-weight-black);
+  text-align: center;
+  border-radius: var(--fs-border-radius);
+  line-height: 1.4;
+}
+
+.unitLabel {
+  color: var(--fs-color-neutral-5);
+  font-family: var(--fs-text-face-body);
+  font-size: var(--fs-text-size-legend);
+  font-weight: var(--fs-text-weight-bold);
+}
+
+.separator {
+  color: var(--fs-color-text-inverse);
+  font-family: var(--fs-text-face-body);
+  font-size: var(--fs-text-size-2);
+  font-weight: var(--fs-text-weight-bold);
+  padding: 0 var(--fs-spacing-0);
+  opacity: 0.5;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--fs-spacing-1) var(--fs-spacing-3);
+  border: var(--fs-border-width-thick) solid var(--fs-color-main-2);
+  border-radius: var(--fs-border-radius);
+  color: var(--fs-color-main-2);
+  background-color: transparent;
+  font-family: var(--fs-text-face-body);
+  font-size: var(--fs-text-size-1);
+  font-weight: var(--fs-text-weight-bold);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--fs-transition-timing) var(--fs-transition-function),
+    color var(--fs-transition-timing) var(--fs-transition-function);
+
+  &:hover {
+    background-color: var(--fs-color-main-2);
+    color: var(--fs-color-text-inverse);
+  }
+}
+
+.expired {
+  color: var(--fs-color-neutral-5);
+  font-family: var(--fs-text-face-body);
+  font-size: var(--fs-text-size-2);
+  font-style: italic;
+}

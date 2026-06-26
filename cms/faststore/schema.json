@@ -1,0 +1,43 @@
+{
+  "$base": "vtex.faststore@4",
+  "components": {
+    "CountdownBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CountdownBar",
+      "$componentTitle": "Countdown Bar",
+      "title": "Countdown Bar",
+      "description": "Barra de cuenta regresiva para eventos (Cyber, Black Friday, etc.).",
+      "type": "object",
+      "required": [
+        "endDate"
+      ],
+      "properties": {
+        "endDate": {
+          "title": "Fecha y hora de fin",
+          "description": "Formato ISO 8601: YYYY-MM-DDTHH:MM:SS (ej: 2026-12-01T00:00:00)",
+          "type": "string",
+          "default": "2026-12-01T00:00:00"
+        },
+        "label": {
+          "title": "Texto del anuncio",
+          "type": "string",
+          "default": "🔥 Cyber — termina en:"
+        },
+        "ctaLabel": {
+          "title": "Texto del botón",
+          "type": "string",
+          "default": "Ver ofertas"
+        },
+        "ctaUrl": {
+          "title": "URL del botón",
+          "type": "string",
+          "default": "#"
+        }
+      }
+    }
+  },
+  "$defs": {},
+  "content-types": {}
+}
