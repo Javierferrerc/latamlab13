@@ -36,6 +36,17 @@
           "default": "#"
         }
       }
+    },
+    "PDPDataBasic": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PDPDataBasic",
+      "$componentTitle": "PDP Data Basic",
+      "title": "PDP Data Basic",
+      "description": "Bloque de PDP que toma el producto actual con usePDP() y consulta una API extra (rating, votos, especificaciones, etc.).",
+      "type": "object",
+      "properties": {}
     }
   },
   "$defs": {},
