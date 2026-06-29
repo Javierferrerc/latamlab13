@@ -58,6 +58,301 @@
       "description": "Bloque de PDP que consume campos extendidos del producto (commercialTags, productGroups) resueltos en la capa GraphQL/BFF.",
       "type": "object",
       "properties": {}
+    },
+    "PulseAnnouncementBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseAnnouncementBar",
+      "$componentTitle": "Pulse - AnnouncementBar",
+      "title": "Pulse - AnnouncementBar",
+      "description": "Barra de anuncio superior full-width (fondo de acento, texto centrado). Comunica beneficios clave. Soporta varios mensajes con separador o rotación automática.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "messages": {
+          "title": "Mensajes",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "title": "Mensaje",
+            "type": "object",
+            "properties": {
+              "text": {
+                "title": "Texto",
+                "type": "string"
+              },
+              "url": {
+                "title": "Link (opcional)",
+                "type": "string",
+                "description": "Si se completa, el mensaje es clickeable."
+              }
+            }
+          }
+        },
+        "separator": {
+          "title": "Separador entre mensajes",
+          "type": "string",
+          "default": " · ",
+          "description": "Se usa cuando la rotación está apagada y hay más de un mensaje."
+        },
+        "rotate": {
+          "title": "Rotar mensajes (carrusel)",
+          "type": "boolean",
+          "default": false,
+          "description": "Si está activo, muestra un mensaje a la vez y va rotando. Si está apagado, muestra todos juntos separados por el separador."
+        },
+        "rotateInterval": {
+          "title": "Intervalo de rotación (ms)",
+          "type": "number",
+          "default": 4000,
+          "minimum": 1500,
+          "maximum": 15000
+        },
+        "sticky": {
+          "title": "Fija arriba (sticky)",
+          "type": "boolean",
+          "default": false
+        },
+        "background": {
+          "title": "Color de fondo",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "textColor": {
+          "title": "Color del texto",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "fontFamily": {
+          "title": "Fuente",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        },
+        "fontSize": {
+          "title": "Tamaño (desktop)",
+          "type": "string",
+          "default": "12.5px"
+        },
+        "fontSizeMobile": {
+          "title": "Tamaño (mobile)",
+          "type": "string",
+          "default": "11.5px"
+        },
+        "fontWeight": {
+          "title": "Peso de fuente",
+          "type": "string",
+          "default": "500",
+          "enum": [
+            "300",
+            "400",
+            "500",
+            "600",
+            "700"
+          ],
+          "enumNames": [
+            "Ligero",
+            "Normal",
+            "Medio",
+            "Semi negrita",
+            "Negrita"
+          ]
+        },
+        "letterSpacing": {
+          "title": "Espaciado de letras",
+          "type": "string",
+          "default": "0.03em"
+        },
+        "paddingY": {
+          "title": "Padding vertical (px)",
+          "type": "number",
+          "default": 9,
+          "minimum": 0,
+          "maximum": 40
+        }
+      }
+    },
+    "PulseNavBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseNavBar",
+      "$componentTitle": "Pulse - NavBar",
+      "title": "Pulse - NavBar",
+      "description": "Cabecera de navegación Pulse: logo, menú de categorías e iconos de utilidad (buscar, cuenta, carrito con contador real). Sticky con fondo translúcido + blur. Carrito y búsqueda funcionan de forma nativa.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "logoText": {
+          "title": "Logo (texto)",
+          "type": "string",
+          "default": "PULSO",
+          "description": "Se usa si no se carga una imagen de logo."
+        },
+        "logoImage": {
+          "title": "Logo (imagen)",
+          "type": "object",
+          "properties": {
+            "src": {
+              "title": "Imagen",
+              "type": "string",
+              "description": "Si se carga, reemplaza al logo de texto. PNG/SVG con fondo transparente.",
+              "widget": {
+                "ui:widget": "media-gallery"
+              }
+            },
+            "alt": {
+              "title": "Texto alternativo",
+              "type": "string"
+            }
+          }
+        },
+        "logoUrl": {
+          "title": "Link del logo",
+          "type": "string",
+          "default": "/"
+        },
+        "navLinks": {
+          "title": "Links de categorías",
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 10,
+          "items": {
+            "title": "Link",
+            "type": "object",
+            "properties": {
+              "label": {
+                "title": "Texto",
+                "type": "string"
+              },
+              "url": {
+                "title": "URL",
+                "type": "string",
+                "description": "Ej: /running"
+              }
+            }
+          }
+        },
+        "showSearch": {
+          "title": "Mostrar buscador",
+          "type": "boolean",
+          "default": true
+        },
+        "searchUrl": {
+          "title": "URL de búsqueda",
+          "type": "string",
+          "default": "/s"
+        },
+        "showAccount": {
+          "title": "Mostrar cuenta",
+          "type": "boolean",
+          "default": true
+        },
+        "accountUrl": {
+          "title": "URL de cuenta",
+          "type": "string",
+          "default": "/login"
+        },
+        "showCart": {
+          "title": "Mostrar carrito",
+          "type": "boolean",
+          "default": true
+        },
+        "highlightActiveLink": {
+          "title": "Resaltar categoría activa",
+          "type": "boolean",
+          "default": false,
+          "description": "Si está activo, resalta en color de marca el link cuya URL coincide con la página actual. Apagado por default."
+        },
+        "sticky": {
+          "title": "Fijo al hacer scroll (sticky)",
+          "type": "boolean",
+          "default": true
+        },
+        "enableBlur": {
+          "title": "Desenfoque de fondo (blur)",
+          "type": "boolean",
+          "default": true
+        },
+        "blurAmount": {
+          "title": "Intensidad del blur (px)",
+          "type": "number",
+          "default": 10,
+          "minimum": 0,
+          "maximum": 40
+        },
+        "background": {
+          "title": "Color de fondo",
+          "type": "string",
+          "default": "rgba(255, 255, 255, 0.92)",
+          "description": "Hex o rgba. Para el efecto translúcido usar rgba (ej: rgba(255,255,255,0.92))."
+        },
+        "brandColor": {
+          "title": "Color de marca (activo + badge)",
+          "type": "string",
+          "default": "#6D28F5",
+          "description": "Hex. Color del link activo, hover y el badge del carrito."
+        },
+        "linkColor": {
+          "title": "Color de los links",
+          "type": "string",
+          "default": "#3a3645"
+        },
+        "logoColor": {
+          "title": "Color del logo",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "iconColor": {
+          "title": "Color de los iconos",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "borderColor": {
+          "title": "Color del borde inferior",
+          "type": "string",
+          "default": "#ECEAF1"
+        },
+        "badgeTextColor": {
+          "title": "Color del texto del badge",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "logoFontFamily": {
+          "title": "Fuente del logo",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "linkFontFamily": {
+          "title": "Fuente de los links",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        },
+        "logoFontSize": {
+          "title": "Tamaño del logo",
+          "type": "string",
+          "default": "23px"
+        },
+        "logoLetterSpacing": {
+          "title": "Espaciado de letras del logo",
+          "type": "string",
+          "default": "0.14em"
+        },
+        "linkFontSize": {
+          "title": "Tamaño de los links",
+          "type": "string",
+          "default": "14.5px"
+        }
+      }
     }
   },
   "$defs": {},

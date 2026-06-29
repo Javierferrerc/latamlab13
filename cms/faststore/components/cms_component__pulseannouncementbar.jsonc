@@ -1,0 +1,70 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseAnnouncementBar",
+  "$componentTitle": "Pulse - AnnouncementBar",
+  "title": "Pulse - AnnouncementBar",
+  "description": "Barra de anuncio superior full-width (fondo de acento, texto centrado). Comunica beneficios clave. Soporta varios mensajes con separador o rotación automática.",
+  "type": "object",
+  "properties": {
+    "showComponent": {
+      "title": "Mostrar sección",
+      "type": "boolean",
+      "default": true
+    },
+
+    "messages": {
+      "title": "Mensajes",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 6,
+      "items": {
+        "title": "Mensaje",
+        "type": "object",
+        "properties": {
+          "text": { "title": "Texto", "type": "string" },
+          "url": { "title": "Link (opcional)", "type": "string", "description": "Si se completa, el mensaje es clickeable." }
+        }
+      }
+    },
+    "separator": {
+      "title": "Separador entre mensajes",
+      "type": "string",
+      "default": " · ",
+      "description": "Se usa cuando la rotación está apagada y hay más de un mensaje."
+    },
+
+    "rotate": {
+      "title": "Rotar mensajes (carrusel)",
+      "type": "boolean",
+      "default": false,
+      "description": "Si está activo, muestra un mensaje a la vez y va rotando. Si está apagado, muestra todos juntos separados por el separador."
+    },
+    "rotateInterval": {
+      "title": "Intervalo de rotación (ms)",
+      "type": "number",
+      "default": 4000,
+      "minimum": 1500,
+      "maximum": 15000
+    },
+    "sticky": {
+      "title": "Fija arriba (sticky)",
+      "type": "boolean",
+      "default": false
+    },
+
+    "background": { "title": "Color de fondo", "type": "string", "default": "#6D28F5" },
+    "textColor": { "title": "Color del texto", "type": "string", "default": "#FFFFFF" },
+    "fontFamily": { "title": "Fuente", "type": "string", "default": "'Hanken Grotesk', sans-serif" },
+    "fontSize": { "title": "Tamaño (desktop)", "type": "string", "default": "12.5px" },
+    "fontSizeMobile": { "title": "Tamaño (mobile)", "type": "string", "default": "11.5px" },
+    "fontWeight": {
+      "title": "Peso de fuente",
+      "type": "string",
+      "default": "500",
+      "enum": ["300", "400", "500", "600", "700"],
+      "enumNames": ["Ligero", "Normal", "Medio", "Semi negrita", "Negrita"]
+    },
+    "letterSpacing": { "title": "Espaciado de letras", "type": "string", "default": "0.03em" },
+    "paddingY": { "title": "Padding vertical (px)", "type": "number", "default": 9, "minimum": 0, "maximum": 40 }
+  }
+}
