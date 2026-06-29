@@ -5,6 +5,7 @@ import PDPDataBasic from "./sections/PDPDataBasic/PDPDataBasic"
 import ProductExtraInfo from "./sections/ProductExtraInfo/ProductExtraInfo"
 import PulseNavBar from "./sections/PulseNavBar/PulseNavBar"
 import PulseAnnouncementBar from "./sections/PulseAnnouncementBar/PulseAnnouncementBar"
+import PulseHeroSlider from "./sections/PulseHeroSlider/PulseHeroSlider"
 
 export default {
   Navbar: CustomNavbar,
@@ -14,4 +15,5 @@ export default {
   ProductExtraInfo,
   PulseNavBar,
   PulseAnnouncementBar,
+  PulseHeroSlider,
 }
