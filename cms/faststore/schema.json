@@ -1,0 +1,751 @@
+{
+  "$base": "vtex.faststore@4",
+  "components": {
+    "CountdownBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CountdownBar",
+      "$componentTitle": "Countdown Bar",
+      "title": "Countdown Bar",
+      "description": "Barra de cuenta regresiva para eventos (Cyber, Black Friday, etc.).",
+      "type": "object",
+      "required": [
+        "endDate"
+      ],
+      "properties": {
+        "endDate": {
+          "title": "Fecha y hora de fin",
+          "description": "Formato ISO 8601: YYYY-MM-DDTHH:MM:SS (ej: 2026-12-01T00:00:00)",
+          "type": "string",
+          "default": "2026-12-01T00:00:00"
+        },
+        "label": {
+          "title": "Texto del anuncio",
+          "type": "string",
+          "default": "🔥 Cyber — termina en:"
+        },
+        "ctaLabel": {
+          "title": "Texto del botón",
+          "type": "string",
+          "default": "Ver ofertas"
+        },
+        "ctaUrl": {
+          "title": "URL del botón",
+          "type": "string",
+          "default": "#"
+        }
+      }
+    },
+    "PDPDataBasic": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PDPDataBasic",
+      "$componentTitle": "PDP Data Basic",
+      "title": "PDP Data Basic",
+      "description": "Bloque de PDP que toma el producto actual con usePDP() y consulta una API extra (rating, votos, especificaciones, etc.).",
+      "type": "object",
+      "properties": {}
+    },
+    "ProductExtraInfo": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ProductExtraInfo",
+      "$componentTitle": "Product Extra Info",
+      "title": "Product Extra Info",
+      "description": "Bloque de PDP que consume campos extendidos del producto (commercialTags, productGroups) resueltos en la capa GraphQL/BFF.",
+      "type": "object",
+      "properties": {}
+    },
+    "PulseAnnouncementBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseAnnouncementBar",
+      "$componentTitle": "Pulse - AnnouncementBar",
+      "title": "Pulse - AnnouncementBar",
+      "description": "Barra de anuncio superior full-width (fondo de acento, texto centrado). Comunica beneficios clave. Soporta varios mensajes con separador o rotación automática.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "messages": {
+          "title": "Mensajes",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "title": "Mensaje",
+            "type": "object",
+            "properties": {
+              "text": {
+                "title": "Texto",
+                "type": "string"
+              },
+              "url": {
+                "title": "Link (opcional)",
+                "type": "string",
+                "description": "Si se completa, el mensaje es clickeable."
+              }
+            }
+          }
+        },
+        "separator": {
+          "title": "Separador entre mensajes",
+          "type": "string",
+          "default": " · ",
+          "description": "Se usa cuando la rotación está apagada y hay más de un mensaje."
+        },
+        "rotate": {
+          "title": "Rotar mensajes (carrusel)",
+          "type": "boolean",
+          "default": false,
+          "description": "Si está activo, muestra un mensaje a la vez y va rotando. Si está apagado, muestra todos juntos separados por el separador."
+        },
+        "rotateInterval": {
+          "title": "Intervalo de rotación (ms)",
+          "type": "number",
+          "default": 4000,
+          "minimum": 1500,
+          "maximum": 15000
+        },
+        "sticky": {
+          "title": "Fija arriba (sticky)",
+          "type": "boolean",
+          "default": false
+        },
+        "background": {
+          "title": "Color de fondo",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "textColor": {
+          "title": "Color del texto",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "fontFamily": {
+          "title": "Fuente",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        },
+        "fontSize": {
+          "title": "Tamaño (desktop)",
+          "type": "string",
+          "default": "12.5px"
+        },
+        "fontSizeMobile": {
+          "title": "Tamaño (mobile)",
+          "type": "string",
+          "default": "11.5px"
+        },
+        "fontWeight": {
+          "title": "Peso de fuente",
+          "type": "string",
+          "default": "500",
+          "enum": [
+            "300",
+            "400",
+            "500",
+            "600",
+            "700"
+          ],
+          "enumNames": [
+            "Ligero",
+            "Normal",
+            "Medio",
+            "Semi negrita",
+            "Negrita"
+          ]
+        },
+        "letterSpacing": {
+          "title": "Espaciado de letras",
+          "type": "string",
+          "default": "0.03em"
+        },
+        "paddingY": {
+          "title": "Padding vertical (px)",
+          "type": "number",
+          "default": 9,
+          "minimum": 0,
+          "maximum": 40
+        }
+      }
+    },
+    "PulseCategoryTiles": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseCategoryTiles",
+      "$componentTitle": "Pulse - CategoryTiles",
+      "title": "Pulse - CategoryTiles",
+      "description": "Bloque de acceso a categorías en grid. Cada tile (clickeable a su PLP) tiene eyebrow, nombre, flecha y un fondo (degradado o imagen) con color de acento propio.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "title": {
+          "title": "Título de la sección (opcional)",
+          "type": "string"
+        },
+        "subtitle": {
+          "title": "Subtítulo (opcional)",
+          "type": "string"
+        },
+        "tiles": {
+          "title": "Tiles de categoría",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "title": "Tile",
+            "type": "object",
+            "properties": {
+              "eyebrow": {
+                "title": "Eyebrow",
+                "type": "string"
+              },
+              "name": {
+                "title": "Nombre de la categoría",
+                "type": "string"
+              },
+              "url": {
+                "title": "URL (PLP)",
+                "type": "string",
+                "description": "Ej: /running"
+              },
+              "accentColor": {
+                "title": "Color de acento (eyebrow + flecha)",
+                "type": "string",
+                "default": "#6D28F5"
+              },
+              "gradientStart": {
+                "title": "Degradado: inicio",
+                "type": "string",
+                "default": "#ECE7FA"
+              },
+              "gradientEnd": {
+                "title": "Degradado: fin",
+                "type": "string",
+                "default": "#DCD3F6"
+              },
+              "gradientAngle": {
+                "title": "Degradado: ángulo (deg)",
+                "type": "number",
+                "default": 150,
+                "minimum": 0,
+                "maximum": 360
+              },
+              "backgroundImage": {
+                "title": "Imagen de fondo (opcional, reemplaza el degradado)",
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "title": "Imagen",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery"
+                    }
+                  },
+                  "alt": {
+                    "title": "Texto alternativo",
+                    "type": "string"
+                  }
+                }
+              },
+              "showArrow": {
+                "title": "Mostrar flecha",
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        },
+        "columns": {
+          "title": "Columnas (desktop)",
+          "type": "number",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 6
+        },
+        "columnsMobile": {
+          "title": "Columnas (mobile)",
+          "type": "number",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 3
+        },
+        "gap": {
+          "title": "Separación entre tiles (px)",
+          "type": "number",
+          "default": 16,
+          "minimum": 0,
+          "maximum": 48
+        },
+        "tileHeight": {
+          "title": "Alto de tile desktop (px)",
+          "type": "number",
+          "default": 240,
+          "minimum": 120,
+          "maximum": 480
+        },
+        "tileHeightMobile": {
+          "title": "Alto de tile mobile (px)",
+          "type": "number",
+          "default": 150,
+          "minimum": 100,
+          "maximum": 360
+        },
+        "tileRadius": {
+          "title": "Radio de tile (px)",
+          "type": "number",
+          "default": 18,
+          "minimum": 0,
+          "maximum": 40
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenedor (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "nameColor": {
+          "title": "Color del nombre",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "titleColor": {
+          "title": "Color del título de sección",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "sectionBackground": {
+          "title": "Fondo de la sección",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseHeroSlider": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseHeroSlider",
+      "$componentTitle": "Pulse - HeroSlider",
+      "title": "Pulse - HeroSlider",
+      "description": "Banner principal full-bleed con carrusel de slides. Cada slide: eyebrow, titular, subtítulo, dos CTAs y fondo (degradado, imagen o color). Autoplay con pausa al hover, dots y swipe en mobile.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "slides": {
+          "title": "Slides",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "title": "Slide",
+            "type": "object",
+            "properties": {
+              "eyebrow": {
+                "title": "Eyebrow (texto pequeño superior)",
+                "type": "string"
+              },
+              "title": {
+                "title": "Titular",
+                "type": "string"
+              },
+              "subtitle": {
+                "title": "Subtítulo",
+                "type": "string"
+              },
+              "primaryCta": {
+                "title": "CTA primario",
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "title": "Texto",
+                    "type": "string"
+                  },
+                  "url": {
+                    "title": "URL",
+                    "type": "string",
+                    "description": "Ej: /mujer"
+                  }
+                }
+              },
+              "secondaryCta": {
+                "title": "CTA secundario",
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "title": "Texto",
+                    "type": "string"
+                  },
+                  "url": {
+                    "title": "URL",
+                    "type": "string",
+                    "description": "Ej: /hombre"
+                  }
+                }
+              },
+              "backgroundType": {
+                "title": "Tipo de fondo",
+                "type": "string",
+                "default": "gradient",
+                "enum": [
+                  "gradient",
+                  "image",
+                  "color"
+                ],
+                "enumNames": [
+                  "Degradado",
+                  "Imagen",
+                  "Color sólido"
+                ]
+              },
+              "gradientStart": {
+                "title": "Degradado: inicio",
+                "type": "string",
+                "default": "#1c1430"
+              },
+              "gradientMid": {
+                "title": "Degradado: medio",
+                "type": "string",
+                "default": "#3a2870"
+              },
+              "gradientEnd": {
+                "title": "Degradado: fin",
+                "type": "string",
+                "default": "#6D28F5"
+              },
+              "gradientAngle": {
+                "title": "Degradado: ángulo (deg)",
+                "type": "number",
+                "default": 120,
+                "minimum": 0,
+                "maximum": 360
+              },
+              "backgroundImage": {
+                "title": "Imagen de fondo",
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "title": "Imagen",
+                    "type": "string",
+                    "description": "Recomendado: 1440x580px.",
+                    "widget": {
+                      "ui:widget": "media-gallery"
+                    }
+                  },
+                  "alt": {
+                    "title": "Texto alternativo",
+                    "type": "string"
+                  }
+                }
+              },
+              "backgroundColor": {
+                "title": "Color de fondo (sólido)",
+                "type": "string"
+              },
+              "showGlow": {
+                "title": "Mostrar glow decorativo",
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        },
+        "autoplay": {
+          "title": "Autoplay",
+          "type": "boolean",
+          "default": true
+        },
+        "autoplayDelay": {
+          "title": "Intervalo de autoplay (ms)",
+          "type": "number",
+          "default": 5000,
+          "minimum": 2000,
+          "maximum": 15000
+        },
+        "pauseOnHover": {
+          "title": "Pausar al pasar el mouse",
+          "type": "boolean",
+          "default": true
+        },
+        "showDots": {
+          "title": "Mostrar dots de navegación",
+          "type": "boolean",
+          "default": true
+        },
+        "heightDesktop": {
+          "title": "Alto desktop (px)",
+          "type": "number",
+          "default": 580,
+          "minimum": 300,
+          "maximum": 900
+        },
+        "heightMobile": {
+          "title": "Alto mobile (px)",
+          "type": "number",
+          "default": 520,
+          "minimum": 300,
+          "maximum": 800
+        },
+        "eyebrowColor": {
+          "title": "Color del eyebrow",
+          "type": "string",
+          "default": "#D6FF3F"
+        },
+        "titleColor": {
+          "title": "Color del titular",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "subtitleColor": {
+          "title": "Color del subtítulo",
+          "type": "string",
+          "default": "#D8D2E8"
+        },
+        "primaryCtaBg": {
+          "title": "CTA primario: fondo",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "primaryCtaText": {
+          "title": "CTA primario: texto",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "secondaryCtaBorder": {
+          "title": "CTA secundario: borde",
+          "type": "string",
+          "default": "rgba(255, 255, 255, 0.5)"
+        },
+        "secondaryCtaText": {
+          "title": "CTA secundario: texto",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "ctaRadius": {
+          "title": "Radio de los CTAs (px)",
+          "type": "number",
+          "default": 30,
+          "minimum": 0,
+          "maximum": 60
+        },
+        "titleFontFamily": {
+          "title": "Fuente del titular",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseNavBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseNavBar",
+      "$componentTitle": "Pulse - NavBar",
+      "title": "Pulse - NavBar",
+      "description": "Cabecera de navegación Pulse: logo, menú de categorías e iconos de utilidad (buscar, cuenta, carrito con contador real). Sticky con fondo translúcido + blur. Carrito y búsqueda funcionan de forma nativa.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "logoText": {
+          "title": "Logo (texto)",
+          "type": "string",
+          "default": "PULSO",
+          "description": "Se usa si no se carga una imagen de logo."
+        },
+        "logoImage": {
+          "title": "Logo (imagen)",
+          "type": "object",
+          "properties": {
+            "src": {
+              "title": "Imagen",
+              "type": "string",
+              "description": "Si se carga, reemplaza al logo de texto. PNG/SVG con fondo transparente.",
+              "widget": {
+                "ui:widget": "media-gallery"
+              }
+            },
+            "alt": {
+              "title": "Texto alternativo",
+              "type": "string"
+            }
+          }
+        },
+        "logoUrl": {
+          "title": "Link del logo",
+          "type": "string",
+          "default": "/"
+        },
+        "navLinks": {
+          "title": "Links de categorías",
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 10,
+          "items": {
+            "title": "Link",
+            "type": "object",
+            "properties": {
+              "label": {
+                "title": "Texto",
+                "type": "string"
+              },
+              "url": {
+                "title": "URL",
+                "type": "string",
+                "description": "Ej: /running"
+              }
+            }
+          }
+        },
+        "showSearch": {
+          "title": "Mostrar buscador",
+          "type": "boolean",
+          "default": true
+        },
+        "searchUrl": {
+          "title": "URL de búsqueda",
+          "type": "string",
+          "default": "/s"
+        },
+        "showAccount": {
+          "title": "Mostrar cuenta",
+          "type": "boolean",
+          "default": true
+        },
+        "accountUrl": {
+          "title": "URL de cuenta",
+          "type": "string",
+          "default": "/login"
+        },
+        "showCart": {
+          "title": "Mostrar carrito",
+          "type": "boolean",
+          "default": true
+        },
+        "highlightActiveLink": {
+          "title": "Resaltar categoría activa",
+          "type": "boolean",
+          "default": false,
+          "description": "Si está activo, resalta en color de marca el link cuya URL coincide con la página actual. Apagado por default."
+        },
+        "sticky": {
+          "title": "Fijo al hacer scroll (sticky)",
+          "type": "boolean",
+          "default": true
+        },
+        "enableBlur": {
+          "title": "Desenfoque de fondo (blur)",
+          "type": "boolean",
+          "default": true
+        },
+        "blurAmount": {
+          "title": "Intensidad del blur (px)",
+          "type": "number",
+          "default": 10,
+          "minimum": 0,
+          "maximum": 40
+        },
+        "background": {
+          "title": "Color de fondo",
+          "type": "string",
+          "default": "rgba(255, 255, 255, 0.92)",
+          "description": "Hex o rgba. Para el efecto translúcido usar rgba (ej: rgba(255,255,255,0.92))."
+        },
+        "brandColor": {
+          "title": "Color de marca (activo + badge)",
+          "type": "string",
+          "default": "#6D28F5",
+          "description": "Hex. Color del link activo, hover y el badge del carrito."
+        },
+        "linkColor": {
+          "title": "Color de los links",
+          "type": "string",
+          "default": "#3a3645"
+        },
+        "logoColor": {
+          "title": "Color del logo",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "iconColor": {
+          "title": "Color de los iconos",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "borderColor": {
+          "title": "Color del borde inferior",
+          "type": "string",
+          "default": "#ECEAF1"
+        },
+        "badgeTextColor": {
+          "title": "Color del texto del badge",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "logoFontFamily": {
+          "title": "Fuente del logo",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "linkFontFamily": {
+          "title": "Fuente de los links",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        },
+        "logoFontSize": {
+          "title": "Tamaño del logo",
+          "type": "string",
+          "default": "23px"
+        },
+        "logoLetterSpacing": {
+          "title": "Espaciado de letras del logo",
+          "type": "string",
+          "default": "0.14em"
+        },
+        "linkFontSize": {
+          "title": "Tamaño de los links",
+          "type": "string",
+          "default": "14.5px"
+        }
+      }
+    }
+  },
+  "$defs": {},
+  "content-types": {}
+}
