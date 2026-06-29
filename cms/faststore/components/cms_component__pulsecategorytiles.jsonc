@@ -1,0 +1,57 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseCategoryTiles",
+  "$componentTitle": "Pulse - CategoryTiles",
+  "title": "Pulse - CategoryTiles",
+  "description": "Bloque de acceso a categorías en grid. Cada tile (clickeable a su PLP) tiene eyebrow, nombre, flecha y un fondo (degradado o imagen) con color de acento propio.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "title": { "title": "Título de la sección (opcional)", "type": "string" },
+    "subtitle": { "title": "Subtítulo (opcional)", "type": "string" },
+
+    "tiles": {
+      "title": "Tiles de categoría",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "title": "Tile",
+        "type": "object",
+        "properties": {
+          "eyebrow": { "title": "Eyebrow", "type": "string" },
+          "name": { "title": "Nombre de la categoría", "type": "string" },
+          "url": { "title": "URL (PLP)", "type": "string", "description": "Ej: /running" },
+          "accentColor": { "title": "Color de acento (eyebrow + flecha)", "type": "string", "default": "#6D28F5" },
+          "gradientStart": { "title": "Degradado: inicio", "type": "string", "default": "#ECE7FA" },
+          "gradientEnd": { "title": "Degradado: fin", "type": "string", "default": "#DCD3F6" },
+          "gradientAngle": { "title": "Degradado: ángulo (deg)", "type": "number", "default": 150, "minimum": 0, "maximum": 360 },
+          "backgroundImage": {
+            "title": "Imagen de fondo (opcional, reemplaza el degradado)",
+            "type": "object",
+            "properties": {
+              "src": { "title": "Imagen", "type": "string", "widget": { "ui:widget": "media-gallery" } },
+              "alt": { "title": "Texto alternativo", "type": "string" }
+            }
+          },
+          "showArrow": { "title": "Mostrar flecha", "type": "boolean", "default": true }
+        }
+      }
+    },
+
+    "columns": { "title": "Columnas (desktop)", "type": "number", "default": 3, "minimum": 1, "maximum": 6 },
+    "columnsMobile": { "title": "Columnas (mobile)", "type": "number", "default": 1, "minimum": 1, "maximum": 3 },
+    "gap": { "title": "Separación entre tiles (px)", "type": "number", "default": 16, "minimum": 0, "maximum": 48 },
+    "tileHeight": { "title": "Alto de tile desktop (px)", "type": "number", "default": 240, "minimum": 120, "maximum": 480 },
+    "tileHeightMobile": { "title": "Alto de tile mobile (px)", "type": "number", "default": 150, "minimum": 100, "maximum": 360 },
+    "tileRadius": { "title": "Radio de tile (px)", "type": "number", "default": 18, "minimum": 0, "maximum": 40 },
+    "maxWidth": { "title": "Ancho máximo del contenedor (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
+
+    "nameColor": { "title": "Color del nombre", "type": "string", "default": "#15131B" },
+    "titleColor": { "title": "Color del título de sección", "type": "string", "default": "#15131B" },
+    "sectionBackground": { "title": "Fondo de la sección", "type": "string", "default": "#FFFFFF" },
+    "titleFontFamily": { "title": "Fuente de títulos", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}

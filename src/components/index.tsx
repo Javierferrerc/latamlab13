@@ -6,6 +6,7 @@ import ProductExtraInfo from "./sections/ProductExtraInfo/ProductExtraInfo"
 import PulseNavBar from "./sections/PulseNavBar/PulseNavBar"
 import PulseAnnouncementBar from "./sections/PulseAnnouncementBar/PulseAnnouncementBar"
 import PulseHeroSlider from "./sections/PulseHeroSlider/PulseHeroSlider"
+import PulseCategoryTiles from "./sections/PulseCategoryTiles/PulseCategoryTiles"
 
 export default {
   Navbar: CustomNavbar,
@@ -16,4 +17,5 @@ export default {
   PulseNavBar,
   PulseAnnouncementBar,
   PulseHeroSlider,
+  PulseCategoryTiles,
 }
