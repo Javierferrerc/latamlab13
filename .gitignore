@@ -38,3 +38,6 @@ yarn-error.log*
 /.faststore
 .vscode/
 lighthouserc.js
+
+# claude code skills (kept personal in ~/.claude/skills, not versioned here)
+.claude/skills/
