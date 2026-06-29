@@ -1,0 +1,83 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseHeroSlider",
+  "$componentTitle": "Pulse - HeroSlider",
+  "title": "Pulse - HeroSlider",
+  "description": "Banner principal full-bleed con carrusel de slides. Cada slide: eyebrow, titular, subtítulo, dos CTAs y fondo (degradado, imagen o color). Autoplay con pausa al hover, dots y swipe en mobile.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "slides": {
+      "title": "Slides",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "title": "Slide",
+        "type": "object",
+        "properties": {
+          "eyebrow": { "title": "Eyebrow (texto pequeño superior)", "type": "string" },
+          "title": { "title": "Titular", "type": "string" },
+          "subtitle": { "title": "Subtítulo", "type": "string" },
+          "primaryCta": {
+            "title": "CTA primario",
+            "type": "object",
+            "properties": {
+              "text": { "title": "Texto", "type": "string" },
+              "url": { "title": "URL", "type": "string", "description": "Ej: /mujer" }
+            }
+          },
+          "secondaryCta": {
+            "title": "CTA secundario",
+            "type": "object",
+            "properties": {
+              "text": { "title": "Texto", "type": "string" },
+              "url": { "title": "URL", "type": "string", "description": "Ej: /hombre" }
+            }
+          },
+          "backgroundType": {
+            "title": "Tipo de fondo",
+            "type": "string",
+            "default": "gradient",
+            "enum": ["gradient", "image", "color"],
+            "enumNames": ["Degradado", "Imagen", "Color sólido"]
+          },
+          "gradientStart": { "title": "Degradado: inicio", "type": "string", "default": "#1c1430" },
+          "gradientMid": { "title": "Degradado: medio", "type": "string", "default": "#3a2870" },
+          "gradientEnd": { "title": "Degradado: fin", "type": "string", "default": "#6D28F5" },
+          "gradientAngle": { "title": "Degradado: ángulo (deg)", "type": "number", "default": 120, "minimum": 0, "maximum": 360 },
+          "backgroundImage": {
+            "title": "Imagen de fondo",
+            "type": "object",
+            "properties": {
+              "src": { "title": "Imagen", "type": "string", "description": "Recomendado: 1440x580px.", "widget": { "ui:widget": "media-gallery" } },
+              "alt": { "title": "Texto alternativo", "type": "string" }
+            }
+          },
+          "backgroundColor": { "title": "Color de fondo (sólido)", "type": "string" },
+          "showGlow": { "title": "Mostrar glow decorativo", "type": "boolean", "default": true }
+        }
+      }
+    },
+
+    "autoplay": { "title": "Autoplay", "type": "boolean", "default": true },
+    "autoplayDelay": { "title": "Intervalo de autoplay (ms)", "type": "number", "default": 5000, "minimum": 2000, "maximum": 15000 },
+    "pauseOnHover": { "title": "Pausar al pasar el mouse", "type": "boolean", "default": true },
+    "showDots": { "title": "Mostrar dots de navegación", "type": "boolean", "default": true },
+
+    "heightDesktop": { "title": "Alto desktop (px)", "type": "number", "default": 580, "minimum": 300, "maximum": 900 },
+    "heightMobile": { "title": "Alto mobile (px)", "type": "number", "default": 520, "minimum": 300, "maximum": 800 },
+
+    "eyebrowColor": { "title": "Color del eyebrow", "type": "string", "default": "#D6FF3F" },
+    "titleColor": { "title": "Color del titular", "type": "string", "default": "#FFFFFF" },
+    "subtitleColor": { "title": "Color del subtítulo", "type": "string", "default": "#D8D2E8" },
+    "primaryCtaBg": { "title": "CTA primario: fondo", "type": "string", "default": "#FFFFFF" },
+    "primaryCtaText": { "title": "CTA primario: texto", "type": "string", "default": "#15131B" },
+    "secondaryCtaBorder": { "title": "CTA secundario: borde", "type": "string", "default": "rgba(255, 255, 255, 0.5)" },
+    "secondaryCtaText": { "title": "CTA secundario: texto", "type": "string", "default": "#FFFFFF" },
+    "ctaRadius": { "title": "Radio de los CTAs (px)", "type": "number", "default": 30, "minimum": 0, "maximum": 60 },
+    "titleFontFamily": { "title": "Fuente del titular", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}
