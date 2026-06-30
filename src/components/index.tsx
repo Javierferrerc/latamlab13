@@ -16,6 +16,8 @@ import PulseValueProps from "./sections/PulseValueProps/PulseValueProps"
 import PulseNewsletterBand from "./sections/PulseNewsletterBand/PulseNewsletterBand"
 import PulseFooter from "./sections/PulseFooter/PulseFooter"
 import PulseEspaciador from "./sections/PulseEspaciador/PulseEspaciador"
+import PulseCategoryHeader from "./sections/PulseCategoryHeader/PulseCategoryHeader"
+import PulseProductGallery from "./sections/PulseProductGallery/PulseProductGallery"
 
 export default {
   Navbar: CustomNavbar,
@@ -36,4 +38,6 @@ export default {
   PulseNewsletterBand,
   PulseFooter,
   PulseEspaciador,
+  PulseCategoryHeader,
+  ProductGallery: PulseProductGallery,
 }
