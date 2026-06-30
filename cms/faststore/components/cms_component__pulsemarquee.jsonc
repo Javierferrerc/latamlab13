@@ -1,0 +1,39 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseMarquee",
+  "$componentTitle": "Pulse - Marquee",
+  "title": "Pulse - Marquee",
+  "description": "Cinta de texto en movimiento continuo con los valores de marca, separados por un símbolo de acento. Full-width entre bordes. Decorativa, con pausa al hover y respeto por prefers-reduced-motion.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "items": {
+      "title": "Textos de la cinta",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "title": "Texto",
+        "type": "string"
+      }
+    },
+
+    "separator": { "title": "Separador entre textos", "type": "string", "default": "◆" },
+    "uppercase": { "title": "Mayúsculas", "type": "boolean", "default": true },
+
+    "speed": { "title": "Velocidad del loop (segundos)", "type": "number", "default": 26, "minimum": 5, "maximum": 120 },
+    "pauseOnHover": { "title": "Pausar al pasar el mouse", "type": "boolean", "default": true },
+    "reverse": { "title": "Dirección inversa", "type": "boolean", "default": false },
+
+    "gap": { "title": "Separación entre textos (px)", "type": "number", "default": 46, "minimum": 12, "maximum": 120 },
+    "paddingY": { "title": "Padding vertical (px)", "type": "number", "default": 18, "minimum": 0, "maximum": 64 },
+    "fontSize": { "title": "Tamaño de texto (px)", "type": "number", "default": 18, "minimum": 11, "maximum": 40 },
+
+    "textColor": { "title": "Color del texto", "type": "string", "default": "#15131B" },
+    "separatorColor": { "title": "Color del separador", "type": "string", "default": "#6D28F5" },
+    "background": { "title": "Fondo de la cinta", "type": "string", "default": "#FFFFFF" },
+    "borderColor": { "title": "Color de bordes sup/inf", "type": "string", "default": "#ECEAF1" },
+    "titleFontFamily": { "title": "Fuente del texto", "type": "string", "default": "'Schibsted Grotesk', sans-serif" }
+  }
+}
