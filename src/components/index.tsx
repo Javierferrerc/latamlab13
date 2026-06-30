@@ -19,6 +19,9 @@ import PulseEspaciador from "./sections/PulseEspaciador/PulseEspaciador"
 import PulseCategoryHeader from "./sections/PulseCategoryHeader/PulseCategoryHeader"
 import PulseProductGallery from "./sections/PulseProductGallery/PulseProductGallery"
 import PulseScrollToTop from "./sections/PulseScrollToTop/PulseScrollToTop"
+import PulseBreadcrumb from "./sections/PulseBreadcrumb/PulseBreadcrumb"
+import PulseProductAccordion from "./sections/PulseProductAccordion/PulseProductAccordion"
+import PulseProductDetails from "./sections/PulseProductDetails/PulseProductDetails"
 
 export default {
   Navbar: CustomNavbar,
@@ -42,4 +45,7 @@ export default {
   PulseCategoryHeader,
   ProductGallery: PulseProductGallery,
   ScrollToTopButton: PulseScrollToTop,
+  PulseBreadcrumb,
+  PulseProductAccordion,
+  ProductDetails: PulseProductDetails,
 }
