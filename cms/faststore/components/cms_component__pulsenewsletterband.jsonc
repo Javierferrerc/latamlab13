@@ -1,0 +1,37 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseNewsletterBand",
+  "$componentTitle": "Pulse - NewsletterBand",
+  "title": "Pulse - NewsletterBand",
+  "description": "Banda full-bleed de captación de email con degradado de marca: titular, subtítulo e input pill con botón de suscripción. Estados vacío → focus → éxito (mensaje con check).",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "title": { "title": "Título", "type": "string", "default": "Únete al Club PULSO" },
+    "subtitle": { "title": "Subtítulo", "type": "string" },
+    "placeholder": { "title": "Placeholder del input", "type": "string", "default": "Tu email" },
+    "buttonText": { "title": "Texto del botón", "type": "string", "default": "Suscribir" },
+    "successMessage": { "title": "Mensaje de éxito", "type": "string", "default": "¡Listo! Revisa tu correo para confirmar." },
+
+    "paddingY": { "title": "Padding vertical (px)", "type": "number", "default": 64, "minimum": 24, "maximum": 140 },
+    "maxWidth": { "title": "Ancho máximo del contenido (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
+    "inputMaxWidth": { "title": "Ancho máximo del input (px)", "type": "number", "default": 440, "minimum": 280, "maximum": 720 },
+
+    "gradientStart": { "title": "Degradado: inicio", "type": "string", "default": "#1c1430" },
+    "gradientEnd": { "title": "Degradado: fin", "type": "string", "default": "#6D28F5" },
+    "gradientAngle": { "title": "Degradado: ángulo (deg)", "type": "number", "default": 120, "minimum": 0, "maximum": 360 },
+
+    "titleColor": { "title": "Color del título", "type": "string", "default": "#FFFFFF" },
+    "subtitleColor": { "title": "Color del subtítulo", "type": "string", "default": "#d8d2e8" },
+    "placeholderColor": { "title": "Color del placeholder", "type": "string", "default": "#cabfe6" },
+    "inputBg": { "title": "Fondo del input", "type": "string", "default": "rgba(255, 255, 255, 0.12)" },
+    "buttonBg": { "title": "Botón: fondo (vacío)", "type": "string", "default": "#FFFFFF" },
+    "buttonColor": { "title": "Botón: color de texto", "type": "string", "default": "#15131B" },
+    "accentColor": { "title": "Color de acento (botón con texto / éxito)", "type": "string", "default": "#D6FF3F" },
+    "inputRadius": { "title": "Radio del input (px)", "type": "number", "default": 32, "minimum": 0, "maximum": 48 },
+    "buttonRadius": { "title": "Radio del botón (px)", "type": "number", "default": 26, "minimum": 0, "maximum": 48 },
+    "titleFontFamily": { "title": "Fuente de títulos", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}
