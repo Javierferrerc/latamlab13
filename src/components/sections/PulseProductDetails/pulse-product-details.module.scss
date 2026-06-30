@@ -295,3 +295,44 @@
   flex-direction: column;
   gap: 18px;
 }
+
+/* ---------- Accordion (inside BuyBox) ---------- */
+.accordion {
+  margin-top: 24px;
+}
+
+.accRow {
+  border-bottom: 1px solid #eceaf1;
+}
+
+.accHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 18px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: "Schibsted Grotesk", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #15131b;
+  text-align: left;
+}
+
+.accSign {
+  font-size: 20px;
+  line-height: 1;
+  color: #6d28f5;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.accBody {
+  margin: 0;
+  padding-bottom: 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #5b5667;
+}
