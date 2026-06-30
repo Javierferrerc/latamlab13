@@ -1,0 +1,53 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulsePromoBanners",
+  "$componentTitle": "Pulse - PromoBanners",
+  "title": "Pulse - PromoBanners",
+  "description": "Banners promocionales en grid (1-3 por fila). Cada banner: eyebrow, titular (admite 2 líneas), CTA y fondo (degradado o imagen) con colores propios. En mobile apila en 1 columna.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "banners": {
+      "title": "Banners",
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "title": "Banner",
+        "type": "object",
+        "properties": {
+          "eyebrow": { "title": "Eyebrow", "type": "string" },
+          "title": { "title": "Titular", "type": "string", "description": "Usá un salto de línea para 2 líneas." },
+          "ctaText": { "title": "Texto del CTA", "type": "string" },
+          "ctaUrl": { "title": "URL del CTA", "type": "string", "description": "Ej: /rebajas" },
+          "gradientStart": { "title": "Degradado: inicio", "type": "string", "default": "#15131B" },
+          "gradientEnd": { "title": "Degradado: fin", "type": "string", "default": "#3a2870" },
+          "gradientAngle": { "title": "Degradado: ángulo (deg)", "type": "number", "default": 120, "minimum": 0, "maximum": 360 },
+          "backgroundImage": {
+            "title": "Imagen de fondo (opcional, reemplaza el degradado)",
+            "type": "object",
+            "properties": {
+              "src": { "title": "Imagen", "type": "string", "widget": { "ui:widget": "media-gallery" } },
+              "alt": { "title": "Texto alternativo", "type": "string" }
+            }
+          },
+          "eyebrowColor": { "title": "Color del eyebrow", "type": "string", "default": "#D6FF3F" },
+          "titleColor": { "title": "Color del titular", "type": "string", "default": "#FFFFFF" },
+          "ctaBg": { "title": "CTA: fondo", "type": "string", "default": "#FFFFFF" },
+          "ctaColor": { "title": "CTA: color de texto", "type": "string", "default": "#15131B" }
+        }
+      }
+    },
+
+    "columns": { "title": "Columnas (desktop)", "type": "number", "default": 2, "minimum": 1, "maximum": 3 },
+    "gap": { "title": "Separación entre banners (px)", "type": "number", "default": 20, "minimum": 0, "maximum": 48 },
+    "minHeight": { "title": "Alto mínimo (px)", "type": "number", "default": 260, "minimum": 140, "maximum": 480 },
+    "radius": { "title": "Radio del banner (px)", "type": "number", "default": 22, "minimum": 0, "maximum": 40 },
+    "ctaRadius": { "title": "Radio del CTA (px)", "type": "number", "default": 26, "minimum": 0, "maximum": 60 },
+    "maxWidth": { "title": "Ancho máximo del contenedor (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
+    "paddingY": { "title": "Padding vertical de la sección (px)", "type": "number", "default": 0, "minimum": 0, "maximum": 120 },
+
+    "titleFontFamily": { "title": "Fuente de títulos", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}
