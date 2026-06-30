@@ -1,0 +1,141 @@
+.footer {
+  width: 100%;
+  background: var(--pulse-ft-bg, #15131b);
+  color: #fff;
+  font-family: var(--pulse-ft-body-font, "Hanken Grotesk", sans-serif);
+}
+
+.inner {
+  max-width: var(--pulse-ft-maxw, 1280px);
+  margin: 0 auto;
+  padding: var(--pulse-ft-pt, 56px) 48px var(--pulse-ft-pb, 30px);
+
+  @media (max-width: 767px) {
+    padding: 34px 22px 24px;
+  }
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(var(--pulse-ft-cols, 3), 1fr);
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--pulse-ft-border, rgba(255, 255, 255, 0.12));
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding-bottom: 26px;
+  }
+}
+
+.brand {
+  @media (max-width: 767px) {
+    grid-column: 1 / -1;
+  }
+}
+
+.logo {
+  font-family: var(--pulse-ft-title-font, "Schibsted Grotesk", sans-serif);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 0.14em;
+  color: var(--pulse-ft-logo, #fff);
+  margin-bottom: 14px;
+
+  @media (max-width: 767px) {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+.description {
+  margin: 0;
+  max-width: 240px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--pulse-ft-description, #a8a3b3);
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+    font-size: 13.5px;
+  }
+}
+
+.colTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--pulse-ft-col-title, #cfc9da);
+  margin-bottom: 16px;
+
+  @media (max-width: 767px) {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+
+  @media (max-width: 767px) {
+    gap: 9px;
+  }
+}
+
+.link {
+  font-size: 14px;
+  color: var(--pulse-ft-link, #a8a3b3);
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--pulse-ft-link-hover, #fff);
+  }
+
+  @media (max-width: 767px) {
+    font-size: 13.5px;
+  }
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  font-size: 13px;
+  color: var(--pulse-ft-legal, #8a8595);
+
+  @media (max-width: 767px) {
+    padding-top: 18px;
+    font-size: 12.5px;
+  }
+}
+
+.legal,
+.payments {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.legal > * + *::before,
+.payments > * + *::before {
+  content: "·";
+  margin-right: 8px;
+}
+
+.legalLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--pulse-ft-link-hover, #fff);
+  }
+}

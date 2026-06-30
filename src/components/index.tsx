@@ -14,6 +14,8 @@ import PulsePromoBanners from "./sections/PulsePromoBanners/PulsePromoBanners"
 import PulseCommunityGrid from "./sections/PulseCommunityGrid/PulseCommunityGrid"
 import PulseValueProps from "./sections/PulseValueProps/PulseValueProps"
 import PulseNewsletterBand from "./sections/PulseNewsletterBand/PulseNewsletterBand"
+import PulseFooter from "./sections/PulseFooter/PulseFooter"
+import PulseEspaciador from "./sections/PulseEspaciador/PulseEspaciador"
 
 export default {
   Navbar: CustomNavbar,
@@ -32,4 +34,6 @@ export default {
   PulseCommunityGrid,
   PulseValueProps,
   PulseNewsletterBand,
+  PulseFooter,
+  PulseEspaciador,
 }

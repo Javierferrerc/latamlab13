@@ -1,0 +1,20 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseEspaciador",
+  "$componentTitle": "Pulse - Espaciador",
+  "title": "Pulse - Espaciador",
+  "description": "Espaciador vertical configurable entre secciones. Alto independiente para desktop y mobile, fondo opcional y línea divisoria opcional centrada.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "heightDesktop": { "title": "Alto desktop (px)", "type": "number", "default": 48, "minimum": 0, "maximum": 240 },
+    "heightMobile": { "title": "Alto mobile (px)", "type": "number", "default": 32, "minimum": 0, "maximum": 200 },
+    "background": { "title": "Fondo", "type": "string", "default": "transparent" },
+
+    "showDivider": { "title": "Mostrar línea divisoria", "type": "boolean", "default": false },
+    "dividerColor": { "title": "Color de la línea", "type": "string", "default": "#ECEAF1" },
+    "dividerWidth": { "title": "Grosor de la línea (px)", "type": "number", "default": 1, "minimum": 1, "maximum": 8 },
+    "maxWidth": { "title": "Ancho máximo de la línea (px)", "type": "number", "default": 1280, "minimum": 320, "maximum": 1600 }
+  }
+}
