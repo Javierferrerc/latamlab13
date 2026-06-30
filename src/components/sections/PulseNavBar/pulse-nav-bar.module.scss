@@ -8,8 +8,8 @@
   &[data-sticky="true"] {
     position: sticky;
     top: 0;
-    /* Debajo de los overlays nativos (CartDrawer/modales usan --fs-z-index-highest) */
-    z-index: var(--fs-z-index-top);
+    /* Por encima de todo el contenido, por debajo del CartDrawer (9000). */
+    z-index: 1000;
   }
 }
 
@@ -133,7 +133,8 @@
 .mobileMenu {
   position: fixed;
   inset: 0;
-  z-index: var(--fs-z-index-highest);
+  /* Sobre el header sticky, por debajo del CartDrawer (9000). */
+  z-index: 1100;
   background: #fff;
   display: flex;
   flex-direction: column;

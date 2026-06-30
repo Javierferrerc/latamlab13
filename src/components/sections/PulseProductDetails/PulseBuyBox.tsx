@@ -47,6 +47,7 @@ const PulseBuyBox = ({
 }: PulseBuyBoxProps) => {
   const formatPrice = usePriceFormatter()
   const [quantity, setQuantity] = useState(1)
+  const [openAcc, setOpenAcc] = useState(0)
 
   const {
     id,
@@ -59,6 +60,7 @@ const PulseBuyBox = ({
     image: productImages,
     additionalProperty,
     breadcrumbList,
+    description,
     offers: {
       offers: [{ availability, price, priceWithTaxes, listPrice, seller, listPriceWithTaxes }],
       lowPrice,
@@ -112,6 +114,20 @@ const PulseBuyBox = ({
   }
 
   const shipping = shippingLines?.length ? shippingLines : DEFAULT_SHIPPING
+
+  const accordionItems = [
+    { title: "Descripción", content: description },
+    {
+      title: "Composición y cuidado",
+      content:
+        "85% poliéster reciclado, 15% elastano. Lavar a máquina en frío. No usar secadora ni lejía.",
+    },
+    {
+      title: "Envíos y devoluciones",
+      content:
+        "Envío gratis en 24-48h por compras superiores a 50€. Devoluciones gratuitas en 30 días.",
+    },
+  ].filter((it) => it.content)
 
   return (
     <div className={styles.buybox}>
@@ -190,6 +206,28 @@ const PulseBuyBox = ({
           </div>
         ))}
       </div>
+
+      {accordionItems.length > 0 && (
+        <div className={styles.accordion}>
+          {accordionItems.map((it, i) => {
+            const isOpen = i === openAcc
+            return (
+              <div key={i} className={styles.accRow}>
+                <button
+                  type="button"
+                  className={styles.accHeader}
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenAcc(isOpen ? -1 : i)}
+                >
+                  {it.title}
+                  <span className={styles.accSign}>{isOpen ? "−" : "+"}</span>
+                </button>
+                {isOpen && <p className={styles.accBody}>{it.content}</p>}
+              </div>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
