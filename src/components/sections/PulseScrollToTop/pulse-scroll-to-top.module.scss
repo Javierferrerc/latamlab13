@@ -1,0 +1,73 @@
+.button {
+  position: fixed;
+  bottom: 28px;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  width: 48px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #15131b;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(20, 15, 40, 0.28);
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+
+  // Hidden until the user scrolls past the threshold.
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.15s ease;
+
+  &[data-position="right"] {
+    right: 28px;
+  }
+
+  &[data-position="left"] {
+    left: 28px;
+  }
+
+  &[data-has-label="true"] {
+    width: auto;
+    padding: 0 20px;
+  }
+
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  &:hover {
+    background: #6d28f5;
+  }
+
+  @media (max-width: 767px) {
+    bottom: 20px;
+
+    &[data-position="right"] {
+      right: 18px;
+    }
+
+    &[data-position="left"] {
+      left: 18px;
+    }
+  }
+}
+
+.label {
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: opacity 0.2s ease;
+    transform: none;
+  }
+}
