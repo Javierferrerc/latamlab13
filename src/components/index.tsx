@@ -10,6 +10,10 @@ import PulseCategoryTiles from "./sections/PulseCategoryTiles/PulseCategoryTiles
 import PulseMarquee from "./sections/PulseMarquee/PulseMarquee"
 import PulseProductShelf from "./sections/PulseProductShelf/PulseProductShelf"
 import PulseEditorialBanner from "./sections/PulseEditorialBanner/PulseEditorialBanner"
+import PulsePromoBanners from "./sections/PulsePromoBanners/PulsePromoBanners"
+import PulseCommunityGrid from "./sections/PulseCommunityGrid/PulseCommunityGrid"
+import PulseValueProps from "./sections/PulseValueProps/PulseValueProps"
+import PulseNewsletterBand from "./sections/PulseNewsletterBand/PulseNewsletterBand"
 
 export default {
   Navbar: CustomNavbar,
@@ -24,4 +28,8 @@ export default {
   PulseMarquee,
   PulseProductShelf,
   PulseEditorialBanner,
+  PulsePromoBanners,
+  PulseCommunityGrid,
+  PulseValueProps,
+  PulseNewsletterBand,
 }

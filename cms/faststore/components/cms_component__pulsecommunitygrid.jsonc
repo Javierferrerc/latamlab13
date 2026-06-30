@@ -1,0 +1,54 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseCommunityGrid",
+  "$componentTitle": "Pulse - CommunityGrid",
+  "title": "Pulse - CommunityGrid",
+  "description": "Galería de comunidad / UGC. Cabecera centrada (eyebrow + título + descripción) y grid de tiles cuadrados (imagen o degradado) que enlazan a Instagram. Hover con overlay e icono.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "eyebrow": { "title": "Eyebrow", "type": "string", "default": "COMUNIDAD" },
+    "title": { "title": "Título", "type": "string", "default": "#MueveteConPulso" },
+    "description": { "title": "Descripción", "type": "string" },
+
+    "tiles": {
+      "title": "Tiles",
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "title": "Tile",
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Imagen (UGC)",
+            "type": "object",
+            "properties": {
+              "src": { "title": "Imagen", "type": "string", "widget": { "ui:widget": "media-gallery" } },
+              "alt": { "title": "Texto alternativo", "type": "string" }
+            }
+          },
+          "url": { "title": "Enlace (Instagram / post)", "type": "string", "description": "Se abre en pestaña nueva" },
+          "gradientStart": { "title": "Degradado (si no hay imagen): inicio", "type": "string", "default": "#dcd3f6" },
+          "gradientEnd": { "title": "Degradado (si no hay imagen): fin", "type": "string", "default": "#ece7fa" }
+        }
+      }
+    },
+
+    "columns": { "title": "Columnas (desktop)", "type": "number", "default": 6, "minimum": 2, "maximum": 8 },
+    "columnsTablet": { "title": "Columnas (tablet)", "type": "number", "default": 4, "minimum": 2, "maximum": 6 },
+    "columnsMobile": { "title": "Columnas (mobile)", "type": "number", "default": 3, "minimum": 1, "maximum": 4 },
+    "gap": { "title": "Separación entre tiles (px)", "type": "number", "default": 12, "minimum": 0, "maximum": 32 },
+    "tileRadius": { "title": "Radio de tile (px)", "type": "number", "default": 14, "minimum": 0, "maximum": 32 },
+    "maxWidth": { "title": "Ancho máximo del contenedor (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
+    "paddingY": { "title": "Padding vertical de la sección (px)", "type": "number", "default": 56, "minimum": 0, "maximum": 120 },
+
+    "sectionBackground": { "title": "Fondo de la sección", "type": "string", "default": "#F4F3F6" },
+    "eyebrowColor": { "title": "Color del eyebrow", "type": "string", "default": "#6D28F5" },
+    "titleColor": { "title": "Color del título", "type": "string", "default": "#15131B" },
+    "descriptionColor": { "title": "Color de la descripción", "type": "string", "default": "#6e6a78" },
+    "overlayColor": { "title": "Color del overlay (hover)", "type": "string", "default": "rgba(20, 15, 30, 0.32)" },
+    "titleFontFamily": { "title": "Fuente de títulos", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}
