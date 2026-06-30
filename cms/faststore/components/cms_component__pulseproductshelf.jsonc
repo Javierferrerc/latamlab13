@@ -1,0 +1,65 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseProductShelf",
+  "$componentTitle": "Pulse - ProductShelf",
+  "title": "Pulse - ProductShelf",
+  "description": "Estantería de productos: cabecera (eyebrow + título + enlace 'Ver todo') y grid de ProductCards. Cada card tiene imagen/degradado, badge opcional, wishlist, nombre, categoría y precio (con descuento opcional). En mobile el shelf scrollea horizontal.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "eyebrow": { "title": "Eyebrow", "type": "string", "default": "FAVORITOS" },
+    "title": { "title": "Título", "type": "string", "default": "Lo más vendido" },
+    "viewAllText": { "title": "Texto enlace 'Ver todo'", "type": "string", "default": "Ver todo →" },
+    "viewAllUrl": { "title": "URL 'Ver todo' (PLP)", "type": "string", "description": "Ej: /running" },
+
+    "products": {
+      "title": "Productos",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "title": "Producto",
+        "type": "object",
+        "properties": {
+          "name": { "title": "Nombre", "type": "string" },
+          "category": { "title": "Categoría", "type": "string" },
+          "price": { "title": "Precio", "type": "string", "description": "Ej: 39,90 €" },
+          "oldPrice": { "title": "Precio anterior (opcional)", "type": "string", "description": "Tachado. Ej: 59,90 €" },
+          "url": { "title": "URL (PDP)", "type": "string", "description": "Ej: /camiseta-aero-run/p" },
+          "badge": { "title": "Badge (opcional)", "type": "string", "description": "Ej: Nuevo, -20%, Top ventas" },
+          "badgeBg": { "title": "Badge: fondo", "type": "string", "default": "#15131B" },
+          "badgeColor": { "title": "Badge: color de texto", "type": "string", "default": "#FFFFFF" },
+          "gradientStart": { "title": "Degradado de imagen: inicio", "type": "string", "default": "#ECE8F2" },
+          "gradientEnd": { "title": "Degradado de imagen: fin", "type": "string", "default": "#F6F4FA" },
+          "image": {
+            "title": "Imagen del producto (opcional, reemplaza el degradado)",
+            "type": "object",
+            "properties": {
+              "src": { "title": "Imagen", "type": "string", "widget": { "ui:widget": "media-gallery" } },
+              "alt": { "title": "Texto alternativo", "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "showWishlist": { "title": "Mostrar icono de wishlist", "type": "boolean", "default": true },
+    "columns": { "title": "Columnas (desktop)", "type": "number", "default": 4, "minimum": 2, "maximum": 6 },
+    "gap": { "title": "Separación entre cards (px)", "type": "number", "default": 22, "minimum": 8, "maximum": 48 },
+    "imageRadius": { "title": "Radio de imagen (px)", "type": "number", "default": 16, "minimum": 0, "maximum": 32 },
+    "maxWidth": { "title": "Ancho máximo del contenedor (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
+    "paddingY": { "title": "Padding vertical de la sección (px)", "type": "number", "default": 0, "minimum": 0, "maximum": 120 },
+
+    "eyebrowColor": { "title": "Color del eyebrow", "type": "string", "default": "#6D28F5" },
+    "titleColor": { "title": "Color del título", "type": "string", "default": "#15131B" },
+    "accentColor": { "title": "Color de acento ('Ver todo' + wishlist activo)", "type": "string", "default": "#6D28F5" },
+    "nameColor": { "title": "Color del nombre", "type": "string", "default": "#15131B" },
+    "categoryColor": { "title": "Color de la categoría", "type": "string", "default": "#8A8595" },
+    "priceColor": { "title": "Color del precio", "type": "string", "default": "#15131B" },
+    "oldPriceColor": { "title": "Color del precio anterior", "type": "string", "default": "#B5B0BF" },
+    "sectionBackground": { "title": "Fondo de la sección", "type": "string", "default": "#FFFFFF" },
+    "titleFontFamily": { "title": "Fuente de títulos", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}
