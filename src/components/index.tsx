@@ -18,6 +18,7 @@ import PulseFooter from "./sections/PulseFooter/PulseFooter"
 import PulseEspaciador from "./sections/PulseEspaciador/PulseEspaciador"
 import PulseCategoryHeader from "./sections/PulseCategoryHeader/PulseCategoryHeader"
 import PulseProductGallery from "./sections/PulseProductGallery/PulseProductGallery"
+import PulseScrollToTop from "./sections/PulseScrollToTop/PulseScrollToTop"
 
 export default {
   Navbar: CustomNavbar,
@@ -40,4 +41,5 @@ export default {
   PulseEspaciador,
   PulseCategoryHeader,
   ProductGallery: PulseProductGallery,
+  ScrollToTopButton: PulseScrollToTop,
 }
