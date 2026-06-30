@@ -22,6 +22,7 @@ import PulseScrollToTop from "./sections/PulseScrollToTop/PulseScrollToTop"
 import PulseBreadcrumb from "./sections/PulseBreadcrumb/PulseBreadcrumb"
 import PulseProductAccordion from "./sections/PulseProductAccordion/PulseProductAccordion"
 import PulseProductDetails from "./sections/PulseProductDetails/PulseProductDetails"
+import PulseCartSidebar from "./sections/PulseCartSidebar/PulseCartSidebar"
 
 export default {
   Navbar: CustomNavbar,
@@ -48,4 +49,5 @@ export default {
   PulseBreadcrumb,
   PulseProductAccordion,
   ProductDetails: PulseProductDetails,
+  CartSidebar: PulseCartSidebar,
 }
