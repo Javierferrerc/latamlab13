@@ -1,0 +1,59 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseEditorialBanner",
+  "$componentTitle": "Pulse - EditorialBanner",
+  "title": "Pulse - EditorialBanner",
+  "description": "Banner editorial a 2 columnas (imagen + copy) para comunicar un mensaje de marca/tecnología con CTA. Tarjeta con esquinas redondeadas. La columna de imagen es invertible (izq/der). En mobile apila la imagen arriba.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "eyebrow": { "title": "Eyebrow", "type": "string", "default": "TECNOLOGÍA AEROLAB" },
+    "title": { "title": "Título", "type": "string", "default": "Tejido que respira contigo" },
+    "paragraph": { "title": "Párrafo", "type": "string" },
+    "ctaText": { "title": "Texto del CTA", "type": "string", "default": "Descubrir la tecnología" },
+    "ctaUrl": { "title": "URL del CTA", "type": "string", "description": "Ej: /tecnologia" },
+
+    "imagePosition": {
+      "title": "Posición de la imagen",
+      "type": "string",
+      "default": "left",
+      "enum": ["left", "right"],
+      "enumNames": ["Izquierda", "Derecha"]
+    },
+    "maxWidth": { "title": "Ancho máximo del contenedor (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
+    "minHeight": { "title": "Alto mínimo desktop (px)", "type": "number", "default": 380, "minimum": 200, "maximum": 700 },
+    "cardRadius": { "title": "Radio de la tarjeta (px)", "type": "number", "default": 24, "minimum": 0, "maximum": 48 },
+
+    "backgroundType": {
+      "title": "Tipo de imagen",
+      "type": "string",
+      "default": "gradient",
+      "enum": ["gradient", "image"],
+      "enumNames": ["Degradado", "Imagen"]
+    },
+    "gradientStart": { "title": "Degradado: inicio", "type": "string", "default": "#2a1f4d" },
+    "gradientEnd": { "title": "Degradado: fin", "type": "string", "default": "#6D28F5" },
+    "gradientAngle": { "title": "Degradado: ángulo (deg)", "type": "number", "default": 135, "minimum": 0, "maximum": 360 },
+    "backgroundImage": {
+      "title": "Imagen (reemplaza el degradado)",
+      "type": "object",
+      "properties": {
+        "src": { "title": "Imagen", "type": "string", "widget": { "ui:widget": "media-gallery" } },
+        "alt": { "title": "Texto alternativo", "type": "string" }
+      }
+    },
+    "showGlow": { "title": "Mostrar glow decorativo", "type": "boolean", "default": true },
+    "glowColor": { "title": "Color del glow", "type": "string", "default": "rgba(214, 255, 63, 0.16)" },
+
+    "panelBackground": { "title": "Fondo del panel de texto", "type": "string", "default": "#F4F3F6" },
+    "eyebrowColor": { "title": "Color del eyebrow", "type": "string", "default": "#6D28F5" },
+    "titleColor": { "title": "Color del título", "type": "string", "default": "#15131B" },
+    "paragraphColor": { "title": "Color del párrafo", "type": "string", "default": "#5b5667" },
+    "ctaBg": { "title": "CTA: fondo", "type": "string", "default": "#15131B" },
+    "ctaColor": { "title": "CTA: color de texto", "type": "string", "default": "#FFFFFF" },
+    "ctaRadius": { "title": "CTA: radio (px)", "type": "number", "default": 28, "minimum": 0, "maximum": 60 },
+    "titleFontFamily": { "title": "Fuente de títulos", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}

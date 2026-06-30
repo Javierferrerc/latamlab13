@@ -7,6 +7,9 @@ import PulseNavBar from "./sections/PulseNavBar/PulseNavBar"
 import PulseAnnouncementBar from "./sections/PulseAnnouncementBar/PulseAnnouncementBar"
 import PulseHeroSlider from "./sections/PulseHeroSlider/PulseHeroSlider"
 import PulseCategoryTiles from "./sections/PulseCategoryTiles/PulseCategoryTiles"
+import PulseMarquee from "./sections/PulseMarquee/PulseMarquee"
+import PulseProductShelf from "./sections/PulseProductShelf/PulseProductShelf"
+import PulseEditorialBanner from "./sections/PulseEditorialBanner/PulseEditorialBanner"
 
 export default {
   Navbar: CustomNavbar,
@@ -18,4 +21,7 @@ export default {
   PulseAnnouncementBar,
   PulseHeroSlider,
   PulseCategoryTiles,
+  PulseMarquee,
+  PulseProductShelf,
+  PulseEditorialBanner,
 }
