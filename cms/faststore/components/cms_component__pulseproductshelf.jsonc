@@ -35,8 +35,8 @@
 
     "products": {
       "title": "Productos (lista manual / fallback)",
+      "description": "Opcional. Solo se usa si la 'Colección' está vacía.",
       "type": "array",
-      "minItems": 1,
       "maxItems": 12,
       "items": {
         "title": "Producto",
