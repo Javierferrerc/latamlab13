@@ -3,16 +3,16 @@
   "$componentKey": "PulseCategoryHeader",
   "$componentTitle": "Pulse - CategoryHeader",
   "title": "Pulse - CategoryHeader",
-  "description": "Cabecera de página de categoría (PLP): banda full-bleed con degradado de marca, breadcrumb, título de categoría y descripción corta. Glow decorativo opcional.",
+  "description": "Cabecera de página de categoría (PLP): banda full-bleed con degradado de marca, breadcrumb, título y descripción. El breadcrumb, el título y la descripción se toman automáticamente de la categoría o de la búsqueda; los campos de abajo son solo overrides opcionales.",
   "type": "object",
   "properties": {
     "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
 
     "breadcrumbHomeLabel": { "title": "Breadcrumb: texto de inicio", "type": "string", "default": "Inicio" },
     "breadcrumbHomeUrl": { "title": "Breadcrumb: URL de inicio", "type": "string", "default": "/" },
-    "category": { "title": "Categoría (breadcrumb)", "type": "string", "description": "Ej: Running" },
-    "title": { "title": "Título", "type": "string" },
-    "description": { "title": "Descripción", "type": "string" },
+    "category": { "title": "Categoría (override opcional)", "type": "string", "description": "Vacío = se usa la categoría/búsqueda actual. Solo completá para forzar un valor." },
+    "title": { "title": "Título (override opcional)", "type": "string", "description": "Vacío = título de la categoría o término de búsqueda." },
+    "description": { "title": "Descripción (override opcional)", "type": "string", "description": "Vacío = descripción SEO de la categoría; si no hay, usa la descripción por defecto." },
 
     "height": { "title": "Alto desktop (px)", "type": "number", "default": 230, "minimum": 120, "maximum": 480 },
     "heightMobile": { "title": "Alto mínimo mobile (px)", "type": "number", "default": 170, "minimum": 100, "maximum": 360 },

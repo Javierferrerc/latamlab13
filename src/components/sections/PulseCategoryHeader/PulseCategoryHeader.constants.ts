@@ -1,8 +1,8 @@
 export const DEFAULTS = {
   breadcrumbHomeLabel: "Inicio",
   breadcrumbHomeUrl: "/",
-  category: "Running",
-  title: "Running",
+  // Default description shown when neither the CMS override nor the category's
+  // own SEO description provide one.
   description:
     "Equípate para cada kilómetro. Camisetas, mallas, shorts y chaquetas técnicas.",
 
