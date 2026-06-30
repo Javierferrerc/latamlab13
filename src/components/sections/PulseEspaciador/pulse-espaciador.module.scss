@@ -1,0 +1,29 @@
+.spacer {
+  width: 100%;
+  height: var(--pulse-sp-h, 48px);
+  background: var(--pulse-sp-bg, transparent);
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 767px) {
+    height: var(--pulse-sp-h-mobile, 32px);
+  }
+}
+
+.dividerWrap {
+  width: 100%;
+  max-width: var(--pulse-sp-maxw, 1280px);
+  margin: 0 auto;
+  padding: 0 40px;
+
+  @media (max-width: 767px) {
+    padding: 0 20px;
+  }
+}
+
+.divider {
+  border: none;
+  height: var(--pulse-sp-divider-w, 1px);
+  background: var(--pulse-sp-divider, #eceaf1);
+  margin: 0;
+}
