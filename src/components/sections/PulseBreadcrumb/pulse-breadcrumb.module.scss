@@ -1,0 +1,38 @@
+.breadcrumb {
+  width: 100%;
+  font-family: var(--pulse-bc-font, "Hanken Grotesk", sans-serif);
+}
+
+.inner {
+  max-width: var(--pulse-bc-maxw, 1280px);
+  margin: 0 auto;
+  padding: var(--pulse-bc-py, 20px) 40px;
+  font-size: 12.5px;
+  color: var(--pulse-bc-link, #8a8595);
+  line-height: 1.4;
+
+  @media (max-width: 767px) {
+    padding-left: 20px;
+    padding-right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.link {
+  color: var(--pulse-bc-link, #8a8595);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.current {
+  color: var(--pulse-bc-current, #15131b);
+}
+
+.sep {
+  color: var(--pulse-bc-sep, #8a8595);
+}

@@ -1,0 +1,44 @@
+.accordion {
+  width: 100%;
+  font-family: var(--pulse-ac-body-font, "Hanken Grotesk", sans-serif);
+}
+
+.inner {
+  max-width: var(--pulse-ac-maxw, 480px);
+}
+
+.row {
+  border-bottom: 1px solid var(--pulse-ac-border, #eceaf1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 18px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--pulse-ac-title-font, "Schibsted Grotesk", sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--pulse-ac-title, #15131b);
+  text-align: left;
+}
+
+.sign {
+  font-size: 20px;
+  line-height: 1;
+  color: var(--pulse-ac-sign, #6d28f5);
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.body {
+  margin: 0;
+  padding-bottom: 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--pulse-ac-body, #5b5667);
+}

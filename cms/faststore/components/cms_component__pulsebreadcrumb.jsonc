@@ -1,0 +1,22 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseBreadcrumb",
+  "$componentTitle": "Pulse - Breadcrumb",
+  "title": "Pulse - Breadcrumb",
+  "description": "Migas de pan. La ruta se toma automáticamente del producto (PDP) o de la categoría (PLP). Sobre fondo claro. El último nivel es la página actual (sin enlace).",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "homeLabel": { "title": "Texto de inicio", "type": "string", "default": "Inicio" },
+    "homeUrl": { "title": "URL de inicio", "type": "string", "default": "/" },
+
+    "maxWidth": { "title": "Ancho máximo del contenedor (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
+    "paddingY": { "title": "Padding vertical (px)", "type": "number", "default": 20, "minimum": 0, "maximum": 64 },
+
+    "linkColor": { "title": "Color de los enlaces", "type": "string", "default": "#8A8595" },
+    "currentColor": { "title": "Color de la página actual", "type": "string", "default": "#15131B" },
+    "separatorColor": { "title": "Color del separador", "type": "string", "default": "#8A8595" },
+    "bodyFontFamily": { "title": "Fuente", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}
