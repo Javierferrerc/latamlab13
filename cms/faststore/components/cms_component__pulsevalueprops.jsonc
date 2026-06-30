@@ -1,0 +1,47 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseValueProps",
+  "$componentTitle": "Pulse - ValueProps",
+  "title": "Pulse - ValueProps",
+  "description": "Tira de garantías / propuestas de valor. Ítems con icono lineal (de un set predefinido), título y subtítulo. Grid en desktop, stack en mobile, delimitada por borde inferior.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "items": {
+      "title": "Ítems",
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "title": "Ítem",
+        "type": "object",
+        "properties": {
+          "icon": {
+            "title": "Icono",
+            "type": "string",
+            "default": "shipping",
+            "enum": ["shipping", "returns", "secure", "support", "quality", "payment"],
+            "enumNames": ["Envío", "Devoluciones", "Pago seguro", "Soporte", "Calidad", "Medios de pago"]
+          },
+          "title": { "title": "Título", "type": "string" },
+          "subtitle": { "title": "Subtítulo", "type": "string" },
+          "url": { "title": "Enlace (opcional)", "type": "string", "description": "Ej: /envios" }
+        }
+      }
+    },
+
+    "columns": { "title": "Columnas (desktop)", "type": "number", "default": 3, "minimum": 2, "maximum": 4 },
+    "gap": { "title": "Separación entre columnas (px)", "type": "number", "default": 30, "minimum": 12, "maximum": 64 },
+    "paddingY": { "title": "Padding vertical (px)", "type": "number", "default": 44, "minimum": 0, "maximum": 100 },
+    "maxWidth": { "title": "Ancho máximo del contenedor (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
+    "showBorder": { "title": "Mostrar borde inferior", "type": "boolean", "default": true },
+
+    "iconColor": { "title": "Color de los iconos", "type": "string", "default": "#6D28F5" },
+    "titleColor": { "title": "Color del título", "type": "string", "default": "#15131B" },
+    "subtitleColor": { "title": "Color del subtítulo", "type": "string", "default": "#8A8595" },
+    "borderColor": { "title": "Color del borde inferior", "type": "string", "default": "#ECEAF1" },
+    "sectionBackground": { "title": "Fondo de la sección", "type": "string", "default": "#FFFFFF" },
+    "titleFontFamily": { "title": "Fuente de títulos", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}
