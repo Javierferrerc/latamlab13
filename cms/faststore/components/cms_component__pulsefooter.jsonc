@@ -1,0 +1,76 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PulseFooter",
+  "$componentTitle": "Pulse - Footer",
+  "title": "Pulse - Footer",
+  "description": "Pie de página oscuro: columna de marca (logo + descripción) + N columnas de enlaces, sobre una fila inferior con legales y medios de pago. En mobile apila la marca y las columnas en grid de 2.",
+  "type": "object",
+  "properties": {
+    "showComponent": { "title": "Mostrar sección", "type": "boolean", "default": true },
+
+    "brandName": { "title": "Nombre / logo de marca", "type": "string", "default": "PULSO" },
+    "description": { "title": "Descripción de marca", "type": "string" },
+
+    "columns": {
+      "title": "Columnas de enlaces",
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "title": "Columna",
+        "type": "object",
+        "properties": {
+          "title": { "title": "Título de la columna", "type": "string" },
+          "links": {
+            "title": "Enlaces",
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "title": "Enlace",
+              "type": "object",
+              "properties": {
+                "label": { "title": "Texto", "type": "string" },
+                "url": { "title": "URL", "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "copyright": { "title": "Texto de copyright", "type": "string", "default": "© 2026 PULSO" },
+    "legalLinks": {
+      "title": "Enlaces legales",
+      "type": "array",
+      "maxItems": 6,
+      "items": {
+        "title": "Enlace",
+        "type": "object",
+        "properties": {
+          "label": { "title": "Texto", "type": "string" },
+          "url": { "title": "URL", "type": "string" }
+        }
+      }
+    },
+    "paymentMethods": {
+      "title": "Medios de pago (texto)",
+      "type": "array",
+      "maxItems": 8,
+      "items": { "title": "Medio", "type": "string" }
+    },
+
+    "maxWidth": { "title": "Ancho máximo del contenido (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
+    "paddingTop": { "title": "Padding superior (px)", "type": "number", "default": 56, "minimum": 0, "maximum": 120 },
+    "paddingBottom": { "title": "Padding inferior (px)", "type": "number", "default": 30, "minimum": 0, "maximum": 120 },
+
+    "background": { "title": "Fondo", "type": "string", "default": "#15131B" },
+    "logoColor": { "title": "Color del logo", "type": "string", "default": "#FFFFFF" },
+    "descriptionColor": { "title": "Color de la descripción", "type": "string", "default": "#a8a3b3" },
+    "columnTitleColor": { "title": "Color de títulos de columna", "type": "string", "default": "#cfc9da" },
+    "linkColor": { "title": "Color de los enlaces", "type": "string", "default": "#a8a3b3" },
+    "linkHoverColor": { "title": "Color de enlaces (hover)", "type": "string", "default": "#FFFFFF" },
+    "legalColor": { "title": "Color de la fila legal", "type": "string", "default": "#8a8595" },
+    "borderColor": { "title": "Color del separador", "type": "string", "default": "rgba(255, 255, 255, 0.12)" },
+    "titleFontFamily": { "title": "Fuente de títulos", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+  }
+}
