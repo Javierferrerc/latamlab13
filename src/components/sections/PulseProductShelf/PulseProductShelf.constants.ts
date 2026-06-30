@@ -50,6 +50,9 @@ export const DEFAULTS = {
   title: "Lo más vendido",
   viewAllText: "Ver todo →",
 
+  sort: "orders_desc" as const,
+  numberOfItems: 4,
+
   columns: 4,
   gap: 22,
   imageRadius: 16,

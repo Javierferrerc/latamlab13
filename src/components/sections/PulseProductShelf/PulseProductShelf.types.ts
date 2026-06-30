@@ -27,6 +27,14 @@ export interface PulseProductCardProps {
   accentColor?: string
 }
 
+export type PulseShelfSort =
+  | "orders_desc"
+  | "release_desc"
+  | "discount_desc"
+  | "price_asc"
+  | "price_desc"
+  | "score_desc"
+
 export interface PulseProductShelfProps {
   showComponent?: boolean
 
@@ -36,7 +44,10 @@ export interface PulseProductShelfProps {
   viewAllText?: string
   viewAllUrl?: string
 
-  // Content
+  // Content — dynamic (VTEX collection) takes precedence over the manual list
+  collection?: string // VTEX collection / cluster id (productClusterIds facet)
+  sort?: PulseShelfSort
+  numberOfItems?: number
   products?: PulseProduct[]
 
   // Behavior / layout

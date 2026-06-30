@@ -2,7 +2,8 @@ import Head from "next/head"
 
 import type { PulseProductShelfProps } from "./PulseProductShelf.types"
 import { DEFAULTS, DEFAULT_PRODUCTS } from "./PulseProductShelf.constants"
-import PulseProductCard from "./PulseProductCard"
+import PulseProductGrid from "./PulseProductGrid"
+import PulseProductShelfDynamic from "./PulseProductShelfDynamic"
 import styles from "./pulse-product-shelf.module.scss"
 
 const PulseProductShelf = ({
@@ -11,6 +12,9 @@ const PulseProductShelf = ({
   title = DEFAULTS.title,
   viewAllText = DEFAULTS.viewAllText,
   viewAllUrl,
+  collection,
+  sort = DEFAULTS.sort,
+  numberOfItems = DEFAULTS.numberOfItems,
   products,
   showWishlist = true,
   columns = DEFAULTS.columns,
@@ -75,17 +79,24 @@ const PulseProductShelf = ({
           )}
         </header>
 
-        <div className={styles.grid}>
-          {list.map((product, i) => (
-            <PulseProductCard
-              key={`${product.url ?? product.name ?? i}`}
-              product={product}
-              showWishlist={showWishlist}
-              imageRadius={imageRadius}
-              accentColor={accentColor}
-            />
-          ))}
-        </div>
+        {collection ? (
+          <PulseProductShelfDynamic
+            collection={collection}
+            sort={sort}
+            numberOfItems={numberOfItems}
+            showWishlist={showWishlist}
+            imageRadius={imageRadius}
+            accentColor={accentColor}
+            fallback={list}
+          />
+        ) : (
+          <PulseProductGrid
+            products={list}
+            showWishlist={showWishlist}
+            imageRadius={imageRadius}
+            accentColor={accentColor}
+          />
+        )}
       </div>
     </section>
   )
