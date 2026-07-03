@@ -1,0 +1,36 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "SkuOptionColors",
+  "$componentTitle": "SKU - Colores de variante",
+  "title": "SKU - Colores de variante",
+  "description": "Mapa global de nombres de color a valores hex para pintar los swatches del selector de SKU. No renderiza HTML. Agregar una sola vez (global o en la PDP). El nombre del color debe coincidir exactamente con el valor que entrega VTEX en availableVariations.",
+  "type": "object",
+  "properties": {
+    "colors": {
+      "type": "array",
+      "title": "Colores",
+      "items": {
+        "type": "object",
+        "title": "Color",
+        "required": ["colorName", "value"],
+        "properties": {
+          "colorName": {
+            "type": "string",
+            "title": "Nombre del color",
+            "description": "Debe coincidir exactamente con el nombre de la variante en VTEX (ej. \"Azul Marino\")."
+          },
+          "value": {
+            "type": "string",
+            "title": "Valor hex",
+            "description": "Color en formato hexadecimal. Ejemplo: #101418."
+          },
+          "isMetallic": {
+            "type": "boolean",
+            "title": "Efecto metálico",
+            "default": false
+          }
+        }
+      }
+    }
+  }
+}
