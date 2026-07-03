@@ -73,6 +73,13 @@
   box-shadow: 0 0 0 1px #e2dfea;
 }
 
+.imgSwatch {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 11px;
+}
+
 .option[data-selected="true"] .swatch {
   box-shadow:
     0 0 0 2px #fff,
