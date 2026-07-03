@@ -19,7 +19,13 @@ const toPulseProduct = (
   const hasDiscount = listPrice > spotPrice && spotPrice > 0
   const img = node?.image?.[0]
 
+  const clusterBadges = (node?.productGroups ?? [])
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .map((c: any) => c?.name)
+    .filter((name: unknown): name is string => typeof name === "string" && name.trim().length > 0)
+
   return {
+    clusterBadges,
     name: node?.isVariantOf?.name ?? node?.name,
     category: node?.brand?.name,
     price: formatPrice(spotPrice),

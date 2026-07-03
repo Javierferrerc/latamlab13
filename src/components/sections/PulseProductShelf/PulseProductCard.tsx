@@ -50,16 +50,25 @@ const PulseProductCard = ({
       aria-label={product.name}
     >
       <div className={styles.media} style={productImage(product)}>
-        {product.badge && (
-          <span
-            className={styles.badge}
-            style={{
-              background: product.badgeBg ?? "#15131B",
-              color: product.badgeColor ?? "#ffffff",
-            }}
-          >
-            {product.badge}
-          </span>
+        {(product.badge || (product.clusterBadges?.length ?? 0) > 0) && (
+          <div className={styles.badgeStack}>
+            {product.badge && (
+              <span
+                className={styles.badge}
+                style={{
+                  background: product.badgeBg ?? "#15131B",
+                  color: product.badgeColor ?? "#ffffff",
+                }}
+              >
+                {product.badge}
+              </span>
+            )}
+            {product.clusterBadges?.map((label) => (
+              <span key={label} className={styles.clusterBadge}>
+                {label}
+              </span>
+            ))}
+          </div>
         )}
         {showWishlist && (
           <button

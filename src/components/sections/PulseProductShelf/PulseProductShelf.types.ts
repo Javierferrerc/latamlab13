@@ -14,6 +14,10 @@ export interface PulseProduct {
   badgeBg?: string
   badgeColor?: string
 
+  // Cucardas de colección (clusterHighlights). Se apilan sobre la imagen
+  // junto al badge de descuento.
+  clusterBadges?: string[]
+
   // Background of the image area (gradient by default, or an image)
   gradientStart?: string
   gradientEnd?: string
