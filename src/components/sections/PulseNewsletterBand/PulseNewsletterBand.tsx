@@ -3,11 +3,21 @@
 import { useState } from "react"
 import Head from "next/head"
 
+import { useNewsletter } from "src/sdk/newsletter/useNewsletter"
+
 import type { PulseNewsletterBandProps } from "./PulseNewsletterBand.types"
 import { DEFAULTS } from "./PulseNewsletterBand.constants"
 import styles from "./pulse-newsletter-band.module.scss"
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+type NewsletterStatus = "idle" | "loading" | "success" | "error"
+
+type SubscribeResult = {
+  subscribeToNewsletter?: {
+    id?: string | null
+  } | null
+}
 
 const CheckIcon = () => (
   <svg
@@ -29,7 +39,11 @@ const PulseNewsletterBand = ({
   subtitle = DEFAULTS.subtitle,
   placeholder = DEFAULTS.placeholder,
   buttonText = DEFAULTS.buttonText,
+  loadingText = DEFAULTS.loadingText,
   successMessage = DEFAULTS.successMessage,
+  errorMessage = DEFAULTS.errorMessage,
+  showConsent = DEFAULTS.showConsent,
+  consentText = DEFAULTS.consentText,
   paddingY = DEFAULTS.paddingY,
   maxWidth = DEFAULTS.maxWidth,
   inputMaxWidth = DEFAULTS.inputMaxWidth,
@@ -48,10 +62,16 @@ const PulseNewsletterBand = ({
   titleFontFamily = DEFAULTS.titleFontFamily,
   bodyFontFamily = DEFAULTS.bodyFontFamily,
 }: PulseNewsletterBandProps) => {
+  const { subscribeUser, loading } = useNewsletter()
   const [email, setEmail] = useState("")
-  const [done, setDone] = useState(false)
+  const [accepted, setAccepted] = useState(false)
+  const [emailError, setEmailError] = useState("")
+  const [status, setStatus] = useState<NewsletterStatus>("idle")
 
   if (showComponent === false) return null
+
+  const isSubmitting = loading || status === "loading"
+  const canSubmit = (!showConsent || accepted) && !isSubmitting
 
   const cssVars = {
     "--pulse-nl-py": `${paddingY}px`,
@@ -73,11 +93,41 @@ const PulseNewsletterBand = ({
 
   const hasInput = email.trim().length > 0
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!EMAIL_RE.test(email.trim())) return
-    // Integration point: send `email` to your newsletter provider here.
-    setDone(true)
+    setEmailError("")
+    setStatus("idle")
+
+    const normalizedEmail = email.trim()
+
+    if (!EMAIL_RE.test(normalizedEmail)) {
+      setEmailError("Ingresá un email válido.")
+      return
+    }
+
+    if (showConsent && !accepted) {
+      setStatus("error")
+      return
+    }
+
+    setStatus("loading")
+
+    try {
+      const result = (await subscribeUser({
+        data: { name: "", email: normalizedEmail },
+      })) as SubscribeResult | undefined
+
+      if (result?.subscribeToNewsletter?.id) {
+        setEmail("")
+        setAccepted(false)
+        setStatus("success")
+        return
+      }
+
+      setStatus("error")
+    } catch {
+      setStatus("error")
+    }
   }
 
   return (
@@ -95,26 +145,66 @@ const PulseNewsletterBand = ({
         {title && <h2 className={styles.title}>{title}</h2>}
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
 
-        {done ? (
-          <p className={styles.success}>
+        {status === "success" ? (
+          <p className={styles.success} role="status" aria-live="polite">
             <CheckIcon />
             {successMessage}
           </p>
         ) : (
-          <form className={styles.form} onSubmit={onSubmit} data-filled={hasInput}>
-            <input
-              type="email"
-              className={styles.input}
-              placeholder={placeholder}
-              aria-label={placeholder}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <button type="submit" className={styles.button}>
-              {buttonText}
-            </button>
-          </form>
+          <>
+            <form className={styles.form} onSubmit={onSubmit} data-filled={hasInput} noValidate>
+              <input
+                type="email"
+                className={styles.input}
+                placeholder={placeholder}
+                aria-label={placeholder}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  setEmailError("")
+                  if (status === "error") setStatus("idle")
+                }}
+                aria-invalid={emailError ? "true" : "false"}
+                required
+              />
+              <button
+                type="submit"
+                className={styles.button}
+                disabled={!canSubmit}
+                aria-busy={isSubmitting}
+              >
+                {isSubmitting ? loadingText : buttonText}
+              </button>
+            </form>
+
+            {showConsent && (
+              <label className={styles.consent}>
+                <input
+                  type="checkbox"
+                  checked={accepted}
+                  onChange={(e) => {
+                    setAccepted(e.target.checked)
+                    if (status === "error") setStatus("idle")
+                  }}
+                />
+                <span>{consentText}</span>
+              </label>
+            )}
+
+            {emailError && (
+              <p className={styles.error} role="alert">
+                {emailError}
+              </p>
+            )}
+
+            {status === "error" && !emailError && (
+              <p className={styles.error} role="alert">
+                {showConsent && !accepted
+                  ? "Debés aceptar para continuar."
+                  : errorMessage}
+              </p>
+            )}
+          </>
         )}
       </div>
     </section>
