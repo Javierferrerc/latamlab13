@@ -4,7 +4,12 @@ export const DEFAULTS = {
     "Recibe un 10% en tu primera compra y accede a drops antes que nadie.",
   placeholder: "Tu email",
   buttonText: "Suscribir",
+  loadingText: "Enviando...",
   successMessage: "¡Listo! Revisa tu correo para confirmar.",
+  errorMessage: "Hubo un error al suscribirte. Intentá nuevamente.",
+
+  showConsent: true,
+  consentText: "Acepto recibir comunicaciones comerciales.",
 
   paddingY: 64,
   maxWidth: 1280,

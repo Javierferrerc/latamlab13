@@ -82,6 +82,36 @@
   font-size: 14.5px;
   font-family: inherit;
   transition: background-color 0.15s ease;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.consent {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 14px auto 0;
+  max-width: var(--pulse-nl-input-maxw, 440px);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--pulse-nl-subtitle, #d8d2e8);
+  cursor: pointer;
+
+  input {
+    flex-shrink: 0;
+    accent-color: var(--pulse-nl-accent, #d6ff3f);
+    cursor: pointer;
+  }
+}
+
+.error {
+  margin: 12px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffb3b3;
 }
 
 // When the user has typed, the action turns to the accent (lime) color.

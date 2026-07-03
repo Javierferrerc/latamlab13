@@ -6,7 +6,13 @@ export interface PulseNewsletterBandProps {
   subtitle?: string
   placeholder?: string
   buttonText?: string
+  loadingText?: string
   successMessage?: string
+  errorMessage?: string
+
+  // Consentimiento (bloquea el submit hasta aceptar)
+  showConsent?: boolean
+  consentText?: string
 
   // Layout
   paddingY?: number

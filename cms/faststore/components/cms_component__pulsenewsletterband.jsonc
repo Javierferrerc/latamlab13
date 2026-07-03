@@ -12,7 +12,12 @@
     "subtitle": { "title": "Subtítulo", "type": "string" },
     "placeholder": { "title": "Placeholder del input", "type": "string", "default": "Tu email" },
     "buttonText": { "title": "Texto del botón", "type": "string", "default": "Suscribir" },
+    "loadingText": { "title": "Texto mientras envía", "type": "string", "default": "Enviando..." },
     "successMessage": { "title": "Mensaje de éxito", "type": "string", "default": "¡Listo! Revisa tu correo para confirmar." },
+    "errorMessage": { "title": "Mensaje de error", "type": "string", "default": "Hubo un error al suscribirte. Intentá nuevamente." },
+
+    "showConsent": { "title": "Mostrar checkbox de consentimiento", "type": "boolean", "default": true },
+    "consentText": { "title": "Texto de consentimiento", "type": "string", "default": "Acepto recibir comunicaciones comerciales." },
 
     "paddingY": { "title": "Padding vertical (px)", "type": "number", "default": 64, "minimum": 24, "maximum": 140 },
     "maxWidth": { "title": "Ancho máximo del contenido (px)", "type": "number", "default": 1280, "minimum": 600, "maximum": 1600 },
