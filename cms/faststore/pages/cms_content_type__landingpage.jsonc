@@ -1,0 +1,71 @@
+{
+  "landingPage": {
+    "$extends": ["#/components/base-page-template"],
+    "$singleton": false,
+    "type": "object",
+    "title": "Landing Page",
+    "properties": {
+      "slug": {
+        "type": "string",
+        "widget": {
+          "ui:widget": "slug"
+        },
+        "$componentTitle": "slug"
+      },
+      "siteMap": {
+        "title": "Public",
+        "description": "Cuando está activo, la URL de esta página se agrega a sitemap.xml para que los buscadores puedan descubrirla e indexarla. Desactivar para dejar la página fuera del sitemap (p. ej. páginas privadas, temporales o de campaña).",
+        "default": true,
+        "type": "boolean"
+      },
+      "seo": {
+        "title": "SEO",
+        "description": "Configuración de SEO para la página",
+        "type": "object",
+        "widget": {
+          "ui:ObjectFieldTemplate": "GoogleSeoPreview"
+        },
+        "required": ["slug", "title", "description"],
+        "properties": {
+          "slug": {
+            "title": "Path",
+            "type": "string",
+            "default": "/"
+          },
+          "title": {
+            "title": "Título de la página",
+            "description": "Se muestra en el tab del navegador y en resultados de búsqueda.",
+            "type": "string",
+            "default": "Página"
+          },
+          "titleTemplate": {
+            "title": "Template del título",
+            "description": "Usa %s para referenciar el título. Ejemplo: %s | Tienda",
+            "type": "string",
+            "default": "%s | PULSO"
+          },
+          "description": {
+            "title": "Meta descripción",
+            "description": "Descripción corta para resultados de búsqueda.",
+            "type": "string",
+            "default": ""
+          },
+          "canonical": {
+            "title": "URL canonical",
+            "description": "URL canónica de la página. Dejar vacío para usar la URL actual.",
+            "type": "string"
+          }
+        },
+        "$componentTitle": "SEO"
+      },
+      "sections": {
+        "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+      }
+    },
+    "readOnly": false,
+    "writeOnly": false,
+    "deprecated": false,
+    "$abstract": false,
+    "identifierKeys": ["slug"]
+  }
+}
