@@ -26,6 +26,29 @@ import styles from "./pulse-product-gallery.module.scss"
 
 const ACCENT = "#6D28F5"
 
+/*
+ * Decisión técnica - filtros PLP
+ * Fecha de revisión: 2026-07-03
+ *
+ * Decisión tomada:
+ * Se reemplaza el filtro desktop nativo de ProductGallery por un sidebar propio
+ * (PulseFilterSidebar) dentro de esta sección override, que ya está registrada
+ * como `ProductGallery` en src/components/index.tsx. El estado de facetas se
+ * maneja con la API de FastStore v4: `useSearch()` + `toggleFacet` / `removeFacet`
+ * / `setFacet` desde @faststore/sdk. No se recrea la lógica de búsqueda.
+ *
+ * Motivo:
+ * El diseño Pulse necesita controlar estructura, markup, chips activos, rangos de
+ * precio y agrupación visual de las facetas, que el reskin por SCSS del filtro
+ * nativo no permite sin ocultamientos frágiles.
+ *
+ * Alternativa descartada:
+ * Mantener el filtro nativo y aplicar solo SCSS sobre selectores data-fs-*.
+ *
+ * Razón del descarte:
+ * El override ya existía en la tienda (PulseProductGallery) y resuelve la selección,
+ * limpieza y conteo de facetas mediante el SDK, por lo que el reskin no aplica.
+ */
 const PulseProductGallery = ({
   filterTitle = DEFAULTS.filterTitle,
   clearLabel = DEFAULTS.clearLabel,
