@@ -4,9 +4,33 @@ import { useMemo, useState } from "react"
 
 import { useBuyButton } from "src/sdk/cart/useBuyButton"
 import { usePriceFormatter } from "src/sdk/product/useFormattedPrice"
-import Selectors from "src/components/ui/SkuSelector"
 
+import PulseSkuSelector from "./PulseSkuSelector"
 import styles from "./pulse-product-details.module.scss"
+
+/*
+ * Decisión técnica - SKU Selector
+ * Fecha de revisión: 2026-07-03
+ *
+ * Decisión tomada:
+ * Se reemplaza el SkuSelector nativo (src/components/ui/SkuSelector) por
+ * PulseSkuSelector dentro del BuyBox. Sigue construyendo las opciones desde
+ * skuVariants y navegando por slugsMap (navegación real, sin estado local),
+ * pero además pinta swatches de color leídos del mapa configurable en CMS
+ * (sección SkuOptionColors). Cuando no hay color mapeado, cae a texto.
+ *
+ * Motivo:
+ * El requerimiento necesita swatches de color por nombre (ej. "Rojo" -> #e31c1c)
+ * cuando el catálogo entrega el nombre pero no una imagen por SKU. El selector
+ * nativo no convierte nombres de color en hex configurables por negocio.
+ *
+ * Alternativa descartada:
+ * Mantener el SkuSelector nativo + SCSS (ya estaba reskineado en custom-theme.scss).
+ *
+ * Razón del descarte:
+ * SCSS no puede mapear de forma mantenible nombres de color del catálogo a hex
+ * editables desde el CMS.
+ */
 
 interface PulseBuyBoxProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -154,11 +178,7 @@ const PulseBuyBox = ({
               </a>
             )}
           </div>
-          <Selectors
-            slugsMap={skuVariants.slugsMap}
-            availableVariations={skuVariants.availableVariations}
-            activeVariations={skuVariants.activeVariations}
-          />
+          <PulseSkuSelector skuVariants={skuVariants} />
         </div>
       )}
 
