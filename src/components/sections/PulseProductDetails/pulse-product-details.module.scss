@@ -289,13 +289,6 @@
   }
 }
 
-/* Native SkuSelector spacing (kept functional; light Pulse touch) */
-.selectors :global(section) {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
 /* ---------- Accordion (inside BuyBox) ---------- */
 .accordion {
   margin-top: 24px;

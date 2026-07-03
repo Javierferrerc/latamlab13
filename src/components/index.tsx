@@ -23,8 +23,10 @@ import PulseBreadcrumb from "./sections/PulseBreadcrumb/PulseBreadcrumb"
 import PulseProductAccordion from "./sections/PulseProductAccordion/PulseProductAccordion"
 import PulseProductDetails from "./sections/PulseProductDetails/PulseProductDetails"
 import PulseCartSidebar from "./sections/PulseCartSidebar/PulseCartSidebar"
+import { SkuOptionColors } from "./sections/SkuOptionColors"
 
 export default {
+  SkuOptionColors,
   Navbar: CustomNavbar,
   CountdownBar,
   BannerText: CustomBannerText,
