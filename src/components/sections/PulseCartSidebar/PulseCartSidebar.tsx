@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { useUI } from "@faststore/ui"
 
 import { useCart } from "src/sdk/cart"
@@ -31,18 +32,47 @@ const PulseCartSidebar = () => {
   const checkoutProps = useCheckoutButton()
   const formatPrice = usePriceFormatter()
 
-  if (!displayCart) return null
+  // Animación de entrada/salida controlada por estado: mantenemos el drawer
+  // montado durante la salida (~320ms) para que corra la transición.
+  const [render, setRender] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (displayCart) {
+      setRender(true)
+      const t = setTimeout(() => setOpen(true), 10)
+      return () => clearTimeout(t)
+    }
+    setOpen(false)
+    const t = setTimeout(() => setRender(false), 320)
+    return () => clearTimeout(t)
+  }, [displayCart])
+
+  if (!render) return null
 
   const isEmpty = items.length === 0
   const remaining = Math.max(0, FREE_SHIPPING - subTotal)
   const pct = subTotal > 0 ? Math.min(100, (subTotal / FREE_SHIPPING) * 100) : 0
   const ship = subTotal >= FREE_SHIPPING || subTotal === 0 ? 0 : SHIPPING_COST
-  const total = subTotal + ship
+  // subTotal = suma de listPrice; itemsTotal aplica el precio con descuento.
+  const itemsTotal = items.reduce(
+    (acc, item) => acc + (item.price ?? 0) * item.quantity,
+    0
+  )
+  const discount = Math.max(0, subTotal - itemsTotal)
+  const total = itemsTotal + ship
 
   return (
     <div className={styles.root}>
-      <div className={styles.backdrop} onClick={closeCart} />
-      <aside className={styles.drawer} role="dialog" aria-label="Carrito">
+      <div
+        className={`${styles.backdrop} ${open ? styles.backdropOpen : ""}`}
+        onClick={closeCart}
+      />
+      <aside
+        className={`${styles.drawer} ${open ? styles.drawerOpen : styles.drawerClosed}`}
+        role="dialog"
+        aria-label="Carrito"
+      >
         <div className={styles.header}>
           <div className={styles.title}>Tu carrito ({totalItems})</div>
           <button
@@ -89,6 +119,12 @@ const PulseCartSidebar = () => {
                 <span>Subtotal</span>
                 <span>{formatPrice(subTotal)}</span>
               </div>
+              {discount > 0 && (
+                <div className={styles.row}>
+                  <span>Descuento</span>
+                  <span>−{formatPrice(discount)}</span>
+                </div>
+              )}
               <div className={styles.row}>
                 <span>Envío</span>
                 <span>{ship === 0 ? "Gratis" : formatPrice(ship)}</span>
