@@ -121,10 +121,14 @@ const PulseProductGallery = ({
     </div>
   )
 
+  const hasSidebar = facets.length > 0
+
   return (
     <section className={styles.gallery} style={cssVars} data-fs-product-listing>
-      <div className={styles.layout}>
-        {facets.length > 0 && (
+      <div
+        className={`${styles.layout} ${hasSidebar ? "" : styles.layoutFull}`}
+      >
+        {hasSidebar && (
           <PulseFilterSidebar
             facets={facets}
             title={filterTitle}

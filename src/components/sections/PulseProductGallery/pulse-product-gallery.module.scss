@@ -22,6 +22,12 @@
   }
 }
 
+/* Sin facets (search sin resultados por categoría, o filtros limpiados):
+   no hay sidebar, el grid ocupa todo el ancho en una sola columna. */
+.layoutFull {
+  grid-template-columns: 1fr;
+}
+
 .main {
   min-width: 0;
 }
