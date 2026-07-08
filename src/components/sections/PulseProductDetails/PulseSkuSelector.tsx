@@ -23,6 +23,8 @@ type SkuVariants = {
 
 interface PulseSkuSelectorProps {
   skuVariants?: SkuVariants
+  sizeGuideLabel?: string
+  sizeGuideUrl?: string
 }
 
 const optValue = (o: RawOption) =>
@@ -30,6 +32,13 @@ const optValue = (o: RawOption) =>
 const optLabel = (o: RawOption) =>
   typeof o === "string" ? o : o?.label ?? o?.value ?? ""
 const optSrc = (o: RawOption) => (typeof o === "string" ? undefined : o?.src)
+
+// El label del catálogo suele venir como "Dimensión: valor" (ej "Tamaño: S").
+// Para el chip queremos solo el valor.
+const cleanLabel = (label: string, dimension: string) => {
+  const prefix = `${dimension}:`
+  return label.startsWith(prefix) ? label.slice(prefix.length).trim() : label
+}
 
 const normalizeSlug = (slug: string) => {
   if (!slug) return "#"
@@ -70,7 +79,11 @@ const findSlugForOption = (
   return byDirect ? normalizeSlug(byDirect[1]) : "#"
 }
 
-const PulseSkuSelector = ({ skuVariants }: PulseSkuSelectorProps) => {
+const PulseSkuSelector = ({
+  skuVariants,
+  sizeGuideLabel = "Guía de tallas",
+  sizeGuideUrl,
+}: PulseSkuSelectorProps) => {
   useSkuColorConfig()
 
   const groups = useMemo(() => {
@@ -88,71 +101,126 @@ const PulseSkuSelector = ({ skuVariants }: PulseSkuSelectorProps) => {
     <div className={styles.wrapper} data-fs-pulse-sku-selector>
       {groups.map(([dimension, options]) => {
         const activeValue = skuVariants.activeVariations?.[dimension]
+
+        // Un grupo es "swatch" SOLO si tiene color mapeado en el CMS
+        // (SkuOptionColors). No usamos `src` para detectarlo: VTEX le pone
+        // una imagen de fallback a toda opción (la foto del SKU), así que
+        // basarse en `src` haría que la talla se renderice como imágenes.
+        // Sin color mapeado => chips de texto (talla).
+        const isSwatchGroup = options.some(
+          (o) => getSkuColorByName(optLabel(o)) || getSkuColorByName(optValue(o))
+        )
+
         return (
           <section key={dimension} className={styles.group}>
-            <p className={styles.label}>
-              <span>{dimension}</span>
-              {activeValue && <strong>{activeValue}</strong>}
-            </p>
-            <div className={styles.options}>
+            <div className={styles.labelRow}>
+              <p className={styles.label}>
+                {dimension}
+                {isSwatchGroup && activeValue && (
+                  <span className={styles.labelValue}>
+                    : {cleanLabel(activeValue, dimension)}
+                  </span>
+                )}
+              </p>
+              {!isSwatchGroup && sizeGuideUrl && (
+                <a href={sizeGuideUrl} className={styles.sizeGuide}>
+                  {sizeGuideLabel}
+                </a>
+              )}
+            </div>
+
+            <div className={isSwatchGroup ? styles.swatchOptions : styles.options}>
               {options.map((option, i) => {
                 const value = optValue(option)
-                const label = optLabel(option)
+                const label = cleanLabel(optLabel(option), dimension)
                 const src = optSrc(option)
                 const color =
-                  getSkuColorByName(label) || getSkuColorByName(value)
+                  getSkuColorByName(optLabel(option)) || getSkuColorByName(value)
                 const isSelected = activeValue === value
                 const href = findSlugForOption(dimension, value, skuVariants)
                 const isDisabled = href === "#"
+                const key = `${value}-${i}`
 
-                const style = color
-                  ? ({ "--sku-color": color.value } as React.CSSProperties)
-                  : undefined
-
-                const content = src ? (
-                  <img
-                    className={styles.imgSwatch}
-                    src={src}
-                    alt={label}
-                    loading="lazy"
-                  />
-                ) : color ? (
-                  <span
-                    className={styles.swatch}
-                    style={style}
-                    aria-hidden="true"
-                  />
-                ) : (
-                  <span className={styles.textOption}>{label}</span>
-                )
-
-                if (isDisabled) {
-                  return (
+                if (isSwatchGroup) {
+                  const swatchClass = `${styles.swatchOption} ${
+                    color?.isMetallic ? styles.metallic : ""
+                  }`
+                  // Preferimos el color del CMS sobre la imagen: el grupo es
+                  // swatch porque hubo match de color, así que mostramos el
+                  // punto de color; la imagen solo si no hay color mapeado.
+                  const inner = color ? (
                     <span
-                      key={`${value}-${i}`}
-                      className={styles.option}
+                      className={styles.dot}
+                      style={
+                        { "--sku-color": color.value } as React.CSSProperties
+                      }
+                    />
+                  ) : src ? (
+                    <img
+                      className={styles.imgDot}
+                      src={src}
+                      alt={label}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span className={styles.dot} />
+                  )
+
+                  if (isDisabled) {
+                    return (
+                      <span
+                        key={key}
+                        className={swatchClass}
+                        data-selected={isSelected ? "true" : "false"}
+                        data-disabled="true"
+                        title={label}
+                        aria-disabled="true"
+                      >
+                        {inner}
+                      </span>
+                    )
+                  }
+                  return (
+                    <Link
+                      key={key}
+                      href={href}
+                      prefetch={false}
+                      className={swatchClass}
                       data-selected={isSelected ? "true" : "false"}
-                      data-disabled="true"
-                      data-metallic={color?.isMetallic ? "true" : "false"}
-                      aria-disabled="true"
+                      title={label}
+                      aria-label={`Seleccionar ${dimension} ${label}`}
+                      aria-current={isSelected ? "true" : undefined}
                     >
-                      {content}
-                    </span>
+                      {inner}
+                    </Link>
                   )
                 }
 
+                // Chip de texto (talla)
+                if (isDisabled) {
+                  return (
+                    <span
+                      key={key}
+                      className={styles.chip}
+                      data-selected={isSelected ? "true" : "false"}
+                      data-disabled="true"
+                      aria-disabled="true"
+                    >
+                      {label}
+                    </span>
+                  )
+                }
                 return (
                   <Link
-                    key={`${value}-${i}`}
+                    key={key}
                     href={href}
                     prefetch={false}
-                    className={styles.option}
+                    className={styles.chip}
                     data-selected={isSelected ? "true" : "false"}
-                    data-metallic={color?.isMetallic ? "true" : "false"}
                     aria-label={`Seleccionar ${dimension} ${label}`}
                     aria-current={isSelected ? "true" : undefined}
                   >
-                    {content}
+                    {label}
                   </Link>
                 )
               })}

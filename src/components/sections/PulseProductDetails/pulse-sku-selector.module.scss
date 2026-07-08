@@ -1,92 +1,131 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+}
+
+/* ---------- Label row (dimensión + guía de tallas) ---------- */
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .label {
-  display: flex;
-  gap: 6px;
   margin: 0;
-  color: #8a8595;
-  font-size: 13px;
-}
-
-.label strong {
+  font-size: 14px;
+  font-weight: 600;
   color: #15131b;
-  font-weight: 700;
 }
 
+.labelValue {
+  color: #6e6a78;
+  font-weight: 500;
+}
+
+.sizeGuide {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6d28f5;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ---------- Chips de texto (talla) ---------- */
 .options {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
-.option {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 42px;
-  height: 42px;
-  border: 1px solid #e2dfea;
-  border-radius: 12px;
+.chip {
+  min-width: 50px;
+  padding: 13px 16px;
+  text-align: center;
+  border: 1.5px solid #e2dfea;
+  border-radius: 11px;
   background: #fff;
   color: #15131b;
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
-.option:hover {
+.chip:hover {
   border-color: #15131b;
 }
 
-.option[data-selected="true"] {
+.chip[data-selected="true"] {
   border-color: #15131b;
-  box-shadow: inset 0 0 0 1px #15131b;
+  background: #15131b;
+  color: #fff;
 }
 
-.option[data-disabled="true"] {
-  opacity: 0.35;
+.chip[data-disabled="true"] {
+  border-color: #eceaf1;
+  color: #cfc9da;
+  background: #fff;
   cursor: not-allowed;
   text-decoration: line-through;
 }
 
-.textOption {
-  padding: 0 14px;
-  font-size: 13px;
-  font-weight: 600;
+/* ---------- Swatches de color / imagen ---------- */
+.swatchOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
 }
 
-.swatch {
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  background: var(--sku-color);
-  box-shadow: 0 0 0 1px #e2dfea;
+.swatchOption {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  display: inline-flex;
+  transition: outline-color 0.15s ease;
 }
 
-.imgSwatch {
-  width: 100%;
-  height: 100%;
+.swatchOption[data-selected="true"] {
+  outline: 2px solid #15131b;
+  outline-offset: 3px;
+}
+
+.swatchOption[data-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--sku-color, #d9d5e2);
+  box-shadow: inset 0 0 0 1px rgba(20, 19, 27, 0.08);
+}
+
+.imgDot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
   object-fit: cover;
-  border-radius: 11px;
 }
 
-.option[data-selected="true"] .swatch {
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 4px #6d28f5;
-}
-
-.option[data-metallic="true"] .swatch {
+.metallic .dot {
   background: linear-gradient(
     135deg,
     color-mix(in srgb, var(--sku-color) 55%, white),
