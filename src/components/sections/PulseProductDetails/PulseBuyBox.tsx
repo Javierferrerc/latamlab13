@@ -5,6 +5,7 @@ import { useMemo, useState } from "react"
 import { useBuyButton } from "src/sdk/cart/useBuyButton"
 import { usePriceFormatter } from "src/sdk/product/useFormattedPrice"
 
+import PulseColorSwatches from "./PulseColorSwatches"
 import PulseSkuSelector from "./PulseSkuSelector"
 import styles from "./pulse-product-details.module.scss"
 
@@ -92,6 +93,7 @@ const PulseBuyBox = ({
   } = product
 
   const skuVariants = isVariantOf?.skuVariants
+  const productId = isVariantOf?.productGroupID
 
   const cartItem = {
     id,
@@ -168,17 +170,16 @@ const PulseBuyBox = ({
         )}
       </div>
 
-      {skuVariants && (
+      {(skuVariants || productId) && (
         <div className={styles.selectors}>
-          <div className={styles.selectorsHeader}>
-            <span />
-            {sizeGuideUrl && (
-              <a href={sizeGuideUrl} className={styles.sizeGuide}>
-                {sizeGuideLabel}
-              </a>
-            )}
-          </div>
-          <PulseSkuSelector skuVariants={skuVariants} />
+          <PulseColorSwatches productId={productId} />
+          {skuVariants && (
+            <PulseSkuSelector
+              skuVariants={skuVariants}
+              sizeGuideLabel={sizeGuideLabel}
+              sizeGuideUrl={sizeGuideUrl}
+            />
+          )}
         </div>
       )}
 

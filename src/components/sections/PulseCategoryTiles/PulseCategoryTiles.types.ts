@@ -8,10 +8,14 @@ export interface PulseCategoryTile {
   name?: string
   url?: string
   accentColor?: string
+  arrowColor?: string
+  eyebrowColor?: string
   gradientStart?: string
   gradientEnd?: string
   gradientAngle?: number
   backgroundImage?: PulseImage
+  overlayColor?: string
+  overlayOpacity?: number
   showArrow?: boolean
 }
 
@@ -36,4 +40,10 @@ export interface PulseCategoryTilesProps {
   sectionBackground?: string
   titleFontFamily?: string
   bodyFontFamily?: string
+
+  // Overlay sobre las imágenes (gradiente abajo→arriba) e íconos
+  overlayColor?: string
+  overlayOpacity?: number
+  arrowColor?: string
+  eyebrowColor?: string
 }
