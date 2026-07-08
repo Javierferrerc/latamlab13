@@ -72,11 +72,27 @@
   }
 }
 
+/* Overlay gradiente (abajo→arriba) para oscurecer la imagen y que el texto
+   no choque con el eyebrow / nombre. Color y opacidad configurables. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    var(--pulse-ct-overlay, #15131b) 0%,
+    transparent 72%
+  );
+  opacity: var(--pulse-ct-overlay-opacity, 0.55);
+}
+
 .arrow {
   position: absolute;
   top: 22px;
   right: 22px;
-  color: var(--pulse-ct-accent, #6d28f5);
+  z-index: 2;
+  color: var(--pulse-ct-arrow, var(--pulse-ct-accent, #6d28f5));
   transition: transform 0.2s ease;
 
   @media (max-width: 767px) {
@@ -96,7 +112,7 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.16em;
-  color: var(--pulse-ct-accent, #6d28f5);
+  color: var(--pulse-ct-eyebrow, var(--pulse-ct-accent, #6d28f5));
 
   @media (max-width: 767px) {
     font-size: 11px;

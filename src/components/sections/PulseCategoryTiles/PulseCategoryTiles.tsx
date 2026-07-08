@@ -53,6 +53,10 @@ const PulseCategoryTiles = ({
   sectionBackground = DEFAULTS.sectionBackground,
   titleFontFamily = DEFAULTS.titleFontFamily,
   bodyFontFamily = DEFAULTS.bodyFontFamily,
+  overlayColor = DEFAULTS.overlayColor,
+  overlayOpacity = DEFAULTS.overlayOpacity,
+  arrowColor,
+  eyebrowColor,
 }: PulseCategoryTilesProps) => {
   if (showComponent === false) return null
 
@@ -72,6 +76,10 @@ const PulseCategoryTiles = ({
     "--pulse-ct-bg": sectionBackground,
     "--pulse-ct-title-font": titleFontFamily,
     "--pulse-ct-body-font": bodyFontFamily,
+    "--pulse-ct-overlay": overlayColor,
+    "--pulse-ct-overlay-opacity": String(overlayOpacity),
+    "--pulse-ct-arrow": arrowColor,
+    "--pulse-ct-eyebrow": eyebrowColor,
   } as React.CSSProperties
 
   return (
@@ -99,8 +107,23 @@ const PulseCategoryTiles = ({
               key={`${tile.url ?? tile.name ?? i}`}
               href={tile.url ?? "#"}
               className={styles.tile}
-              style={{ ...tileBackground(tile), "--pulse-ct-accent": tile.accentColor } as React.CSSProperties}
+              style={
+                {
+                  ...tileBackground(tile),
+                  "--pulse-ct-accent": tile.accentColor,
+                  "--pulse-ct-arrow": tile.arrowColor,
+                  "--pulse-ct-eyebrow": tile.eyebrowColor,
+                  "--pulse-ct-overlay": tile.overlayColor,
+                  "--pulse-ct-overlay-opacity":
+                    tile.overlayOpacity != null
+                      ? String(tile.overlayOpacity)
+                      : undefined,
+                } as React.CSSProperties
+              }
             >
+              {tile.backgroundImage?.src && (
+                <span className={styles.overlay} aria-hidden />
+              )}
               {tile.showArrow !== false && <ArrowIcon />}
               <div className={styles.tileContent}>
                 {tile.eyebrow && <span className={styles.eyebrow}>{tile.eyebrow}</span>}

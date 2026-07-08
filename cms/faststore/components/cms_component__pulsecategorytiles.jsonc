@@ -23,7 +23,9 @@
           "eyebrow": { "title": "Eyebrow", "type": "string" },
           "name": { "title": "Nombre de la categoría", "type": "string" },
           "url": { "title": "URL (PLP)", "type": "string", "description": "Ej: /running" },
-          "accentColor": { "title": "Color de acento (eyebrow + flecha)", "type": "string", "default": "#6D28F5" },
+          "accentColor": { "title": "Color de acento (fallback de eyebrow + flecha)", "type": "string", "default": "#6D28F5" },
+          "arrowColor": { "title": "Color de la flecha (opcional, sobrescribe el acento)", "type": "string" },
+          "eyebrowColor": { "title": "Color del eyebrow (opcional, sobrescribe el acento)", "type": "string" },
           "gradientStart": { "title": "Degradado: inicio", "type": "string", "default": "#ECE7FA" },
           "gradientEnd": { "title": "Degradado: fin", "type": "string", "default": "#DCD3F6" },
           "gradientAngle": { "title": "Degradado: ángulo (deg)", "type": "number", "default": 150, "minimum": 0, "maximum": 360 },
@@ -35,6 +37,8 @@
               "alt": { "title": "Texto alternativo", "type": "string" }
             }
           },
+          "overlayColor": { "title": "Overlay imagen: color (opcional, sobrescribe el de la sección)", "type": "string" },
+          "overlayOpacity": { "title": "Overlay imagen: opacidad 0-1 (opcional, sobrescribe el de la sección)", "type": "number", "minimum": 0, "maximum": 1 },
           "showArrow": { "title": "Mostrar flecha", "type": "boolean", "default": true }
         }
       }
@@ -52,6 +56,11 @@
     "titleColor": { "title": "Color del título de sección", "type": "string", "default": "#15131B" },
     "sectionBackground": { "title": "Fondo de la sección", "type": "string", "default": "#FFFFFF" },
     "titleFontFamily": { "title": "Fuente de títulos", "type": "string", "default": "'Schibsted Grotesk', sans-serif" },
-    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" }
+    "bodyFontFamily": { "title": "Fuente del cuerpo", "type": "string", "default": "'Hanken Grotesk', sans-serif" },
+
+    "overlayColor": { "title": "Overlay imágenes: color", "type": "string", "default": "#15131B", "description": "Gradiente de abajo→arriba sobre las imágenes para oscurecer y que no choquen con el texto." },
+    "overlayOpacity": { "title": "Overlay imágenes: opacidad (0-1)", "type": "number", "default": 0.55, "minimum": 0, "maximum": 1 },
+    "arrowColor": { "title": "Color de las flechas", "type": "string", "description": "Si se deja vacío, usa el color de acento de cada tile." },
+    "eyebrowColor": { "title": "Color de los eyebrows", "type": "string", "description": "Si se deja vacío, usa el color de acento de cada tile." }
   }
 }

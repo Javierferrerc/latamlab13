@@ -45,4 +45,8 @@ export const DEFAULTS = {
   sectionBackground: "#ffffff",
   titleFontFamily: "'Schibsted Grotesk', sans-serif",
   bodyFontFamily: "'Hanken Grotesk', sans-serif",
+
+  // Overlay por defecto para oscurecer las imágenes (abajo→arriba)
+  overlayColor: "#15131B",
+  overlayOpacity: 0.55,
 } as const
