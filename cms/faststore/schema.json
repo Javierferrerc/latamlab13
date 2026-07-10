@@ -1,0 +1,2522 @@
+{
+  "$base": "vtex.faststore@4",
+  "components": {
+    "CountdownBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CountdownBar",
+      "$componentTitle": "Countdown Bar",
+      "title": "Countdown Bar",
+      "description": "Barra de cuenta regresiva para eventos (Cyber, Black Friday, etc.).",
+      "type": "object",
+      "required": [
+        "endDate"
+      ],
+      "properties": {
+        "endDate": {
+          "title": "Fecha y hora de fin",
+          "description": "Formato ISO 8601: YYYY-MM-DDTHH:MM:SS (ej: 2026-12-01T00:00:00)",
+          "type": "string",
+          "default": "2026-12-01T00:00:00"
+        },
+        "label": {
+          "title": "Texto del anuncio",
+          "type": "string",
+          "default": "🔥 Cyber — termina en:"
+        },
+        "ctaLabel": {
+          "title": "Texto del botón",
+          "type": "string",
+          "default": "Ver ofertas"
+        },
+        "ctaUrl": {
+          "title": "URL del botón",
+          "type": "string",
+          "default": "#"
+        }
+      }
+    },
+    "PDPDataBasic": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PDPDataBasic",
+      "$componentTitle": "PDP Data Basic",
+      "title": "PDP Data Basic",
+      "description": "Bloque de PDP que toma el producto actual con usePDP() y consulta una API extra (rating, votos, especificaciones, etc.).",
+      "type": "object",
+      "properties": {}
+    },
+    "ProductExtraInfo": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ProductExtraInfo",
+      "$componentTitle": "Product Extra Info",
+      "title": "Product Extra Info",
+      "description": "Bloque de PDP que consume campos extendidos del producto (commercialTags, productGroups) resueltos en la capa GraphQL/BFF.",
+      "type": "object",
+      "properties": {}
+    },
+    "PulseAnnouncementBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseAnnouncementBar",
+      "$componentTitle": "Pulse - AnnouncementBar",
+      "title": "Pulse - AnnouncementBar",
+      "description": "Barra de anuncio superior full-width (fondo de acento, texto centrado). Comunica beneficios clave. Soporta varios mensajes con separador o rotación automática.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "messages": {
+          "title": "Mensajes",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "title": "Mensaje",
+            "type": "object",
+            "properties": {
+              "text": {
+                "title": "Texto",
+                "type": "string"
+              },
+              "url": {
+                "title": "Link (opcional)",
+                "type": "string",
+                "description": "Si se completa, el mensaje es clickeable."
+              }
+            }
+          }
+        },
+        "separator": {
+          "title": "Separador entre mensajes",
+          "type": "string",
+          "default": " · ",
+          "description": "Se usa cuando la rotación está apagada y hay más de un mensaje."
+        },
+        "rotate": {
+          "title": "Rotar mensajes (carrusel)",
+          "type": "boolean",
+          "default": false,
+          "description": "Si está activo, muestra un mensaje a la vez y va rotando. Si está apagado, muestra todos juntos separados por el separador."
+        },
+        "rotateInterval": {
+          "title": "Intervalo de rotación (ms)",
+          "type": "number",
+          "default": 4000,
+          "minimum": 1500,
+          "maximum": 15000
+        },
+        "sticky": {
+          "title": "Fija arriba (sticky)",
+          "type": "boolean",
+          "default": false
+        },
+        "background": {
+          "title": "Color de fondo",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "textColor": {
+          "title": "Color del texto",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "fontFamily": {
+          "title": "Fuente",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        },
+        "fontSize": {
+          "title": "Tamaño (desktop)",
+          "type": "string",
+          "default": "12.5px"
+        },
+        "fontSizeMobile": {
+          "title": "Tamaño (mobile)",
+          "type": "string",
+          "default": "11.5px"
+        },
+        "fontWeight": {
+          "title": "Peso de fuente",
+          "type": "string",
+          "default": "500",
+          "enum": [
+            "300",
+            "400",
+            "500",
+            "600",
+            "700"
+          ],
+          "enumNames": [
+            "Ligero",
+            "Normal",
+            "Medio",
+            "Semi negrita",
+            "Negrita"
+          ]
+        },
+        "letterSpacing": {
+          "title": "Espaciado de letras",
+          "type": "string",
+          "default": "0.03em"
+        },
+        "paddingY": {
+          "title": "Padding vertical (px)",
+          "type": "number",
+          "default": 9,
+          "minimum": 0,
+          "maximum": 40
+        }
+      }
+    },
+    "PulseBreadcrumb": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseBreadcrumb",
+      "$componentTitle": "Pulse - Breadcrumb",
+      "title": "Pulse - Breadcrumb",
+      "description": "Migas de pan. La ruta se toma automáticamente del producto (PDP) o de la categoría (PLP). Sobre fondo claro. El último nivel es la página actual (sin enlace).",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "homeLabel": {
+          "title": "Texto de inicio",
+          "type": "string",
+          "default": "Inicio"
+        },
+        "homeUrl": {
+          "title": "URL de inicio",
+          "type": "string",
+          "default": "/"
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenedor (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "paddingY": {
+          "title": "Padding vertical (px)",
+          "type": "number",
+          "default": 20,
+          "minimum": 0,
+          "maximum": 64
+        },
+        "linkColor": {
+          "title": "Color de los enlaces",
+          "type": "string",
+          "default": "#8A8595"
+        },
+        "currentColor": {
+          "title": "Color de la página actual",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "separatorColor": {
+          "title": "Color del separador",
+          "type": "string",
+          "default": "#8A8595"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseCategoryHeader": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseCategoryHeader",
+      "$componentTitle": "Pulse - CategoryHeader",
+      "title": "Pulse - CategoryHeader",
+      "description": "Cabecera de página de categoría (PLP): banda full-bleed con degradado de marca, breadcrumb, título y descripción. El breadcrumb, el título y la descripción se toman automáticamente de la categoría o de la búsqueda; los campos de abajo son solo overrides opcionales.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "breadcrumbHomeLabel": {
+          "title": "Breadcrumb: texto de inicio",
+          "type": "string",
+          "default": "Inicio"
+        },
+        "breadcrumbHomeUrl": {
+          "title": "Breadcrumb: URL de inicio",
+          "type": "string",
+          "default": "/"
+        },
+        "category": {
+          "title": "Categoría (override opcional)",
+          "type": "string",
+          "description": "Vacío = se usa la categoría/búsqueda actual. Solo completá para forzar un valor."
+        },
+        "title": {
+          "title": "Título (override opcional)",
+          "type": "string",
+          "description": "Vacío = título de la categoría o término de búsqueda."
+        },
+        "description": {
+          "title": "Descripción (override opcional)",
+          "type": "string",
+          "description": "Vacío = descripción SEO de la categoría; si no hay, usa la descripción por defecto."
+        },
+        "height": {
+          "title": "Alto desktop (px)",
+          "type": "number",
+          "default": 230,
+          "minimum": 120,
+          "maximum": 480
+        },
+        "heightMobile": {
+          "title": "Alto mínimo mobile (px)",
+          "type": "number",
+          "default": 170,
+          "minimum": 100,
+          "maximum": 360
+        },
+        "gradientStart": {
+          "title": "Degradado: inicio",
+          "type": "string",
+          "default": "#1c1430"
+        },
+        "gradientMid": {
+          "title": "Degradado: medio",
+          "type": "string",
+          "default": "#3a2870"
+        },
+        "gradientEnd": {
+          "title": "Degradado: fin",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "gradientAngle": {
+          "title": "Degradado: ángulo (deg)",
+          "type": "number",
+          "default": 120,
+          "minimum": 0,
+          "maximum": 360
+        },
+        "showGlow": {
+          "title": "Mostrar glow decorativo",
+          "type": "boolean",
+          "default": true
+        },
+        "glowColor": {
+          "title": "Color del glow",
+          "type": "string",
+          "default": "rgba(214, 255, 63, 0.16)"
+        },
+        "titleColor": {
+          "title": "Color del título",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "breadcrumbColor": {
+          "title": "Color del breadcrumb",
+          "type": "string",
+          "default": "#cabfe6"
+        },
+        "descriptionColor": {
+          "title": "Color de la descripción",
+          "type": "string",
+          "default": "#d8d2e8"
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseCategoryTiles": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseCategoryTiles",
+      "$componentTitle": "Pulse - CategoryTiles",
+      "title": "Pulse - CategoryTiles",
+      "description": "Bloque de acceso a categorías en grid. Cada tile (clickeable a su PLP) tiene eyebrow, nombre, flecha y un fondo (degradado o imagen) con color de acento propio.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "title": {
+          "title": "Título de la sección (opcional)",
+          "type": "string"
+        },
+        "subtitle": {
+          "title": "Subtítulo (opcional)",
+          "type": "string"
+        },
+        "tiles": {
+          "title": "Tiles de categoría",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "title": "Tile",
+            "type": "object",
+            "properties": {
+              "eyebrow": {
+                "title": "Eyebrow",
+                "type": "string"
+              },
+              "name": {
+                "title": "Nombre de la categoría",
+                "type": "string"
+              },
+              "url": {
+                "title": "URL (PLP)",
+                "type": "string",
+                "description": "Ej: /running"
+              },
+              "accentColor": {
+                "title": "Color de acento (fallback de eyebrow + flecha)",
+                "type": "string",
+                "default": "#6D28F5"
+              },
+              "arrowColor": {
+                "title": "Color de la flecha (opcional, sobrescribe el acento)",
+                "type": "string"
+              },
+              "eyebrowColor": {
+                "title": "Color del eyebrow (opcional, sobrescribe el acento)",
+                "type": "string"
+              },
+              "gradientStart": {
+                "title": "Degradado: inicio",
+                "type": "string",
+                "default": "#ECE7FA"
+              },
+              "gradientEnd": {
+                "title": "Degradado: fin",
+                "type": "string",
+                "default": "#DCD3F6"
+              },
+              "gradientAngle": {
+                "title": "Degradado: ángulo (deg)",
+                "type": "number",
+                "default": 150,
+                "minimum": 0,
+                "maximum": 360
+              },
+              "backgroundImage": {
+                "title": "Imagen de fondo (opcional, reemplaza el degradado)",
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "title": "Imagen",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery"
+                    }
+                  },
+                  "alt": {
+                    "title": "Texto alternativo",
+                    "type": "string"
+                  }
+                }
+              },
+              "overlayColor": {
+                "title": "Overlay imagen: color (opcional, sobrescribe el de la sección)",
+                "type": "string"
+              },
+              "overlayOpacity": {
+                "title": "Overlay imagen: opacidad 0-1 (opcional, sobrescribe el de la sección)",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "showArrow": {
+                "title": "Mostrar flecha",
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        },
+        "columns": {
+          "title": "Columnas (desktop)",
+          "type": "number",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 6
+        },
+        "columnsMobile": {
+          "title": "Columnas (mobile)",
+          "type": "number",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 3
+        },
+        "gap": {
+          "title": "Separación entre tiles (px)",
+          "type": "number",
+          "default": 16,
+          "minimum": 0,
+          "maximum": 48
+        },
+        "tileHeight": {
+          "title": "Alto de tile desktop (px)",
+          "type": "number",
+          "default": 240,
+          "minimum": 120,
+          "maximum": 480
+        },
+        "tileHeightMobile": {
+          "title": "Alto de tile mobile (px)",
+          "type": "number",
+          "default": 150,
+          "minimum": 100,
+          "maximum": 360
+        },
+        "tileRadius": {
+          "title": "Radio de tile (px)",
+          "type": "number",
+          "default": 18,
+          "minimum": 0,
+          "maximum": 40
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenedor (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "nameColor": {
+          "title": "Color del nombre",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "titleColor": {
+          "title": "Color del título de sección",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "sectionBackground": {
+          "title": "Fondo de la sección",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        },
+        "overlayColor": {
+          "title": "Overlay imágenes: color",
+          "type": "string",
+          "default": "#15131B",
+          "description": "Gradiente de abajo→arriba sobre las imágenes para oscurecer y que no choquen con el texto."
+        },
+        "overlayOpacity": {
+          "title": "Overlay imágenes: opacidad (0-1)",
+          "type": "number",
+          "default": 0.55,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "arrowColor": {
+          "title": "Color de las flechas",
+          "type": "string",
+          "description": "Si se deja vacío, usa el color de acento de cada tile."
+        },
+        "eyebrowColor": {
+          "title": "Color de los eyebrows",
+          "type": "string",
+          "description": "Si se deja vacío, usa el color de acento de cada tile."
+        }
+      }
+    },
+    "PulseCommunityGrid": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseCommunityGrid",
+      "$componentTitle": "Pulse - CommunityGrid",
+      "title": "Pulse - CommunityGrid",
+      "description": "Galería de comunidad / UGC. Cabecera centrada (eyebrow + título + descripción) y grid de tiles cuadrados (imagen o degradado) que enlazan a Instagram. Hover con overlay e icono.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string",
+          "default": "COMUNIDAD"
+        },
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "default": "#MueveteConPulso"
+        },
+        "description": {
+          "title": "Descripción",
+          "type": "string"
+        },
+        "tiles": {
+          "title": "Tiles",
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "title": "Tile",
+            "type": "object",
+            "properties": {
+              "image": {
+                "title": "Imagen (UGC)",
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "title": "Imagen",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery"
+                    }
+                  },
+                  "alt": {
+                    "title": "Texto alternativo",
+                    "type": "string"
+                  }
+                }
+              },
+              "url": {
+                "title": "Enlace (Instagram / post)",
+                "type": "string",
+                "description": "Se abre en pestaña nueva"
+              },
+              "gradientStart": {
+                "title": "Degradado (si no hay imagen): inicio",
+                "type": "string",
+                "default": "#dcd3f6"
+              },
+              "gradientEnd": {
+                "title": "Degradado (si no hay imagen): fin",
+                "type": "string",
+                "default": "#ece7fa"
+              }
+            }
+          }
+        },
+        "columns": {
+          "title": "Columnas (desktop)",
+          "type": "number",
+          "default": 6,
+          "minimum": 2,
+          "maximum": 8
+        },
+        "columnsTablet": {
+          "title": "Columnas (tablet)",
+          "type": "number",
+          "default": 4,
+          "minimum": 2,
+          "maximum": 6
+        },
+        "columnsMobile": {
+          "title": "Columnas (mobile)",
+          "type": "number",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 4
+        },
+        "gap": {
+          "title": "Separación entre tiles (px)",
+          "type": "number",
+          "default": 12,
+          "minimum": 0,
+          "maximum": 32
+        },
+        "tileRadius": {
+          "title": "Radio de tile (px)",
+          "type": "number",
+          "default": 14,
+          "minimum": 0,
+          "maximum": 32
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenedor (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "paddingY": {
+          "title": "Padding vertical de la sección (px)",
+          "type": "number",
+          "default": 56,
+          "minimum": 0,
+          "maximum": 120
+        },
+        "sectionBackground": {
+          "title": "Fondo de la sección",
+          "type": "string",
+          "default": "#F4F3F6"
+        },
+        "eyebrowColor": {
+          "title": "Color del eyebrow",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "titleColor": {
+          "title": "Color del título",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "descriptionColor": {
+          "title": "Color de la descripción",
+          "type": "string",
+          "default": "#6e6a78"
+        },
+        "overlayColor": {
+          "title": "Color del overlay (hover)",
+          "type": "string",
+          "default": "rgba(20, 15, 30, 0.32)"
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseEditorialBanner": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseEditorialBanner",
+      "$componentTitle": "Pulse - EditorialBanner",
+      "title": "Pulse - EditorialBanner",
+      "description": "Banner editorial a 2 columnas (imagen + copy) para comunicar un mensaje de marca/tecnología con CTA. Tarjeta con esquinas redondeadas. La columna de imagen es invertible (izq/der). En mobile apila la imagen arriba.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string",
+          "default": "TECNOLOGÍA AEROLAB"
+        },
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "default": "Tejido que respira contigo"
+        },
+        "paragraph": {
+          "title": "Párrafo",
+          "type": "string"
+        },
+        "ctaText": {
+          "title": "Texto del CTA",
+          "type": "string",
+          "default": "Descubrir la tecnología"
+        },
+        "ctaUrl": {
+          "title": "URL del CTA",
+          "type": "string",
+          "description": "Ej: /tecnologia"
+        },
+        "imagePosition": {
+          "title": "Posición de la imagen",
+          "type": "string",
+          "default": "left",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "enumNames": [
+            "Izquierda",
+            "Derecha"
+          ]
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenedor (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "minHeight": {
+          "title": "Alto mínimo desktop (px)",
+          "type": "number",
+          "default": 380,
+          "minimum": 200,
+          "maximum": 700
+        },
+        "cardRadius": {
+          "title": "Radio de la tarjeta (px)",
+          "type": "number",
+          "default": 24,
+          "minimum": 0,
+          "maximum": 48
+        },
+        "backgroundType": {
+          "title": "Tipo de imagen",
+          "type": "string",
+          "default": "gradient",
+          "enum": [
+            "gradient",
+            "image"
+          ],
+          "enumNames": [
+            "Degradado",
+            "Imagen"
+          ]
+        },
+        "gradientStart": {
+          "title": "Degradado: inicio",
+          "type": "string",
+          "default": "#2a1f4d"
+        },
+        "gradientEnd": {
+          "title": "Degradado: fin",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "gradientAngle": {
+          "title": "Degradado: ángulo (deg)",
+          "type": "number",
+          "default": 135,
+          "minimum": 0,
+          "maximum": 360
+        },
+        "backgroundImage": {
+          "title": "Imagen (reemplaza el degradado)",
+          "type": "object",
+          "properties": {
+            "src": {
+              "title": "Imagen",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery"
+              }
+            },
+            "alt": {
+              "title": "Texto alternativo",
+              "type": "string"
+            }
+          }
+        },
+        "showGlow": {
+          "title": "Mostrar glow decorativo",
+          "type": "boolean",
+          "default": true
+        },
+        "glowColor": {
+          "title": "Color del glow",
+          "type": "string",
+          "default": "rgba(214, 255, 63, 0.16)"
+        },
+        "panelBackground": {
+          "title": "Fondo del panel de texto",
+          "type": "string",
+          "default": "#F4F3F6"
+        },
+        "eyebrowColor": {
+          "title": "Color del eyebrow",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "titleColor": {
+          "title": "Color del título",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "paragraphColor": {
+          "title": "Color del párrafo",
+          "type": "string",
+          "default": "#5b5667"
+        },
+        "ctaBg": {
+          "title": "CTA: fondo",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "ctaColor": {
+          "title": "CTA: color de texto",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "ctaRadius": {
+          "title": "CTA: radio (px)",
+          "type": "number",
+          "default": 28,
+          "minimum": 0,
+          "maximum": 60
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseEspaciador": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseEspaciador",
+      "$componentTitle": "Pulse - Espaciador",
+      "title": "Pulse - Espaciador",
+      "description": "Espaciador vertical configurable entre secciones. Alto independiente para desktop y mobile, fondo opcional y línea divisoria opcional centrada.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "heightDesktop": {
+          "title": "Alto desktop (px)",
+          "type": "number",
+          "default": 48,
+          "minimum": 0,
+          "maximum": 240
+        },
+        "heightMobile": {
+          "title": "Alto mobile (px)",
+          "type": "number",
+          "default": 32,
+          "minimum": 0,
+          "maximum": 200
+        },
+        "background": {
+          "title": "Fondo",
+          "type": "string",
+          "default": "transparent"
+        },
+        "showDivider": {
+          "title": "Mostrar línea divisoria",
+          "type": "boolean",
+          "default": false
+        },
+        "dividerColor": {
+          "title": "Color de la línea",
+          "type": "string",
+          "default": "#ECEAF1"
+        },
+        "dividerWidth": {
+          "title": "Grosor de la línea (px)",
+          "type": "number",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 8
+        },
+        "maxWidth": {
+          "title": "Ancho máximo de la línea (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 320,
+          "maximum": 1600
+        }
+      }
+    },
+    "PulseFooter": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseFooter",
+      "$componentTitle": "Pulse - Footer",
+      "title": "Pulse - Footer",
+      "description": "Pie de página oscuro: columna de marca (logo + descripción) + N columnas de enlaces, sobre una fila inferior con legales y medios de pago. En mobile apila la marca y las columnas en grid de 2.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "brandName": {
+          "title": "Nombre / logo de marca",
+          "type": "string",
+          "default": "PULSO"
+        },
+        "description": {
+          "title": "Descripción de marca",
+          "type": "string"
+        },
+        "columns": {
+          "title": "Columnas de enlaces",
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "title": "Columna",
+            "type": "object",
+            "properties": {
+              "title": {
+                "title": "Título de la columna",
+                "type": "string"
+              },
+              "links": {
+                "title": "Enlaces",
+                "type": "array",
+                "maxItems": 12,
+                "items": {
+                  "title": "Enlace",
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "title": "Texto",
+                      "type": "string"
+                    },
+                    "url": {
+                      "title": "URL",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "copyright": {
+          "title": "Texto de copyright",
+          "type": "string",
+          "default": "© 2026 PULSO"
+        },
+        "legalLinks": {
+          "title": "Enlaces legales",
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "title": "Enlace",
+            "type": "object",
+            "properties": {
+              "label": {
+                "title": "Texto",
+                "type": "string"
+              },
+              "url": {
+                "title": "URL",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "paymentMethods": {
+          "title": "Medios de pago (texto)",
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "title": "Medio",
+            "type": "string"
+          }
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenido (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "paddingTop": {
+          "title": "Padding superior (px)",
+          "type": "number",
+          "default": 56,
+          "minimum": 0,
+          "maximum": 120
+        },
+        "paddingBottom": {
+          "title": "Padding inferior (px)",
+          "type": "number",
+          "default": 30,
+          "minimum": 0,
+          "maximum": 120
+        },
+        "background": {
+          "title": "Fondo",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "logoColor": {
+          "title": "Color del logo",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "descriptionColor": {
+          "title": "Color de la descripción",
+          "type": "string",
+          "default": "#a8a3b3"
+        },
+        "columnTitleColor": {
+          "title": "Color de títulos de columna",
+          "type": "string",
+          "default": "#cfc9da"
+        },
+        "linkColor": {
+          "title": "Color de los enlaces",
+          "type": "string",
+          "default": "#a8a3b3"
+        },
+        "linkHoverColor": {
+          "title": "Color de enlaces (hover)",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "legalColor": {
+          "title": "Color de la fila legal",
+          "type": "string",
+          "default": "#8a8595"
+        },
+        "borderColor": {
+          "title": "Color del separador",
+          "type": "string",
+          "default": "rgba(255, 255, 255, 0.12)"
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseHeroSlider": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseHeroSlider",
+      "$componentTitle": "Pulse - HeroSlider",
+      "title": "Pulse - HeroSlider",
+      "description": "Banner principal full-bleed con carrusel de slides. Cada slide: eyebrow, titular, subtítulo, dos CTAs y fondo (degradado, imagen o color). Autoplay con pausa al hover, dots y swipe en mobile.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "slides": {
+          "title": "Slides",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "title": "Slide",
+            "type": "object",
+            "properties": {
+              "eyebrow": {
+                "title": "Eyebrow (texto pequeño superior)",
+                "type": "string"
+              },
+              "title": {
+                "title": "Titular",
+                "type": "string"
+              },
+              "subtitle": {
+                "title": "Subtítulo",
+                "type": "string"
+              },
+              "primaryCta": {
+                "title": "CTA primario",
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "title": "Texto",
+                    "type": "string"
+                  },
+                  "url": {
+                    "title": "URL",
+                    "type": "string",
+                    "description": "Ej: /mujer"
+                  }
+                }
+              },
+              "secondaryCta": {
+                "title": "CTA secundario",
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "title": "Texto",
+                    "type": "string"
+                  },
+                  "url": {
+                    "title": "URL",
+                    "type": "string",
+                    "description": "Ej: /hombre"
+                  }
+                }
+              },
+              "backgroundType": {
+                "title": "Tipo de fondo",
+                "type": "string",
+                "default": "gradient",
+                "enum": [
+                  "gradient",
+                  "image",
+                  "color"
+                ],
+                "enumNames": [
+                  "Degradado",
+                  "Imagen",
+                  "Color sólido"
+                ]
+              },
+              "gradientStart": {
+                "title": "Degradado: inicio",
+                "type": "string",
+                "default": "#1c1430"
+              },
+              "gradientMid": {
+                "title": "Degradado: medio",
+                "type": "string",
+                "default": "#3a2870"
+              },
+              "gradientEnd": {
+                "title": "Degradado: fin",
+                "type": "string",
+                "default": "#6D28F5"
+              },
+              "gradientAngle": {
+                "title": "Degradado: ángulo (deg)",
+                "type": "number",
+                "default": 120,
+                "minimum": 0,
+                "maximum": 360
+              },
+              "backgroundImage": {
+                "title": "Imagen de fondo",
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "title": "Imagen",
+                    "type": "string",
+                    "description": "Recomendado: 1440x580px.",
+                    "widget": {
+                      "ui:widget": "media-gallery"
+                    }
+                  },
+                  "alt": {
+                    "title": "Texto alternativo",
+                    "type": "string"
+                  }
+                }
+              },
+              "backgroundColor": {
+                "title": "Color de fondo (sólido)",
+                "type": "string"
+              },
+              "showGlow": {
+                "title": "Mostrar glow decorativo",
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        },
+        "autoplay": {
+          "title": "Autoplay",
+          "type": "boolean",
+          "default": true
+        },
+        "autoplayDelay": {
+          "title": "Intervalo de autoplay (ms)",
+          "type": "number",
+          "default": 5000,
+          "minimum": 2000,
+          "maximum": 15000
+        },
+        "pauseOnHover": {
+          "title": "Pausar al pasar el mouse",
+          "type": "boolean",
+          "default": true
+        },
+        "showDots": {
+          "title": "Mostrar dots de navegación",
+          "type": "boolean",
+          "default": true
+        },
+        "heightDesktop": {
+          "title": "Alto desktop (px)",
+          "type": "number",
+          "default": 580,
+          "minimum": 300,
+          "maximum": 900
+        },
+        "heightMobile": {
+          "title": "Alto mobile (px)",
+          "type": "number",
+          "default": 520,
+          "minimum": 300,
+          "maximum": 800
+        },
+        "eyebrowColor": {
+          "title": "Color del eyebrow",
+          "type": "string",
+          "default": "#D6FF3F"
+        },
+        "titleColor": {
+          "title": "Color del titular",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "subtitleColor": {
+          "title": "Color del subtítulo",
+          "type": "string",
+          "default": "#D8D2E8"
+        },
+        "primaryCtaBg": {
+          "title": "CTA primario: fondo",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "primaryCtaText": {
+          "title": "CTA primario: texto",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "secondaryCtaBorder": {
+          "title": "CTA secundario: borde",
+          "type": "string",
+          "default": "rgba(255, 255, 255, 0.5)"
+        },
+        "secondaryCtaText": {
+          "title": "CTA secundario: texto",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "ctaRadius": {
+          "title": "Radio de los CTAs (px)",
+          "type": "number",
+          "default": 30,
+          "minimum": 0,
+          "maximum": 60
+        },
+        "titleFontFamily": {
+          "title": "Fuente del titular",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseMarquee": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseMarquee",
+      "$componentTitle": "Pulse - Marquee",
+      "title": "Pulse - Marquee",
+      "description": "Cinta de texto en movimiento continuo con los valores de marca, separados por un símbolo de acento. Full-width entre bordes. Decorativa, con pausa al hover y respeto por prefers-reduced-motion.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "items": {
+          "title": "Textos de la cinta",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "title": "Texto",
+            "type": "string"
+          }
+        },
+        "separator": {
+          "title": "Separador entre textos",
+          "type": "string",
+          "default": "◆"
+        },
+        "uppercase": {
+          "title": "Mayúsculas",
+          "type": "boolean",
+          "default": true
+        },
+        "speed": {
+          "title": "Velocidad del loop (segundos)",
+          "type": "number",
+          "default": 26,
+          "minimum": 5,
+          "maximum": 120
+        },
+        "pauseOnHover": {
+          "title": "Pausar al pasar el mouse",
+          "type": "boolean",
+          "default": true
+        },
+        "reverse": {
+          "title": "Dirección inversa",
+          "type": "boolean",
+          "default": false
+        },
+        "gap": {
+          "title": "Separación entre textos (px)",
+          "type": "number",
+          "default": 46,
+          "minimum": 12,
+          "maximum": 120
+        },
+        "paddingY": {
+          "title": "Padding vertical (px)",
+          "type": "number",
+          "default": 18,
+          "minimum": 0,
+          "maximum": 64
+        },
+        "fontSize": {
+          "title": "Tamaño de texto (px)",
+          "type": "number",
+          "default": 18,
+          "minimum": 11,
+          "maximum": 40
+        },
+        "textColor": {
+          "title": "Color del texto",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "separatorColor": {
+          "title": "Color del separador",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "background": {
+          "title": "Fondo de la cinta",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "borderColor": {
+          "title": "Color de bordes sup/inf",
+          "type": "string",
+          "default": "#ECEAF1"
+        },
+        "titleFontFamily": {
+          "title": "Fuente del texto",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseNavBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseNavBar",
+      "$componentTitle": "Pulse - NavBar",
+      "title": "Pulse - NavBar",
+      "description": "Cabecera de navegación Pulse: logo, menú de categorías e iconos de utilidad (buscar, cuenta, carrito con contador real). Sticky con fondo translúcido + blur. Carrito y búsqueda funcionan de forma nativa.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "logoText": {
+          "title": "Logo (texto)",
+          "type": "string",
+          "default": "PULSO",
+          "description": "Se usa si no se carga una imagen de logo."
+        },
+        "logoImage": {
+          "title": "Logo (imagen)",
+          "type": "object",
+          "properties": {
+            "src": {
+              "title": "Imagen",
+              "type": "string",
+              "description": "Si se carga, reemplaza al logo de texto. PNG/SVG con fondo transparente.",
+              "widget": {
+                "ui:widget": "media-gallery"
+              }
+            },
+            "alt": {
+              "title": "Texto alternativo",
+              "type": "string"
+            }
+          }
+        },
+        "logoUrl": {
+          "title": "Link del logo",
+          "type": "string",
+          "default": "/"
+        },
+        "navLinks": {
+          "title": "Links de categorías",
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 10,
+          "items": {
+            "title": "Link",
+            "type": "object",
+            "properties": {
+              "label": {
+                "title": "Texto",
+                "type": "string"
+              },
+              "url": {
+                "title": "URL",
+                "type": "string",
+                "description": "Ej: /hombre"
+              },
+              "subcategories": {
+                "title": "Subcategorías (mega-menú)",
+                "type": "array",
+                "maxItems": 12,
+                "description": "Si tiene subcategorías, al pasar el mouse se abre el mega-menú. Ej: Hombre → Camisetas, Shorts, Ver todo.",
+                "items": {
+                  "title": "Subcategoría",
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "title": "Texto",
+                      "type": "string"
+                    },
+                    "url": {
+                      "title": "URL",
+                      "type": "string"
+                    },
+                    "bold": {
+                      "title": "Destacar (ej. 'Ver todo')",
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }
+              },
+              "promos": {
+                "title": "Banners promocionales del mega-menú (máx 2)",
+                "type": "array",
+                "maxItems": 2,
+                "items": {
+                  "title": "Banner",
+                  "type": "object",
+                  "properties": {
+                    "eyebrow": {
+                      "title": "Eyebrow",
+                      "type": "string"
+                    },
+                    "title": {
+                      "title": "Título",
+                      "type": "string"
+                    },
+                    "url": {
+                      "title": "URL",
+                      "type": "string"
+                    },
+                    "image": {
+                      "title": "Imagen de fondo (opcional, reemplaza el degradado)",
+                      "type": "object",
+                      "properties": {
+                        "src": {
+                          "title": "Imagen",
+                          "type": "string",
+                          "widget": {
+                            "ui:widget": "media-gallery"
+                          }
+                        },
+                        "alt": {
+                          "title": "Texto alternativo",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "gradientStart": {
+                      "title": "Degradado: inicio",
+                      "type": "string",
+                      "default": "#15131B"
+                    },
+                    "gradientEnd": {
+                      "title": "Degradado: fin",
+                      "type": "string",
+                      "default": "#3a2870"
+                    },
+                    "gradientAngle": {
+                      "title": "Degradado: ángulo (deg)",
+                      "type": "number",
+                      "default": 135,
+                      "minimum": 0,
+                      "maximum": 360
+                    },
+                    "accentColor": {
+                      "title": "Color del eyebrow",
+                      "type": "string",
+                      "default": "#D6FF3F"
+                    },
+                    "inkColor": {
+                      "title": "Color del título",
+                      "type": "string",
+                      "default": "#FFFFFF"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "showSearch": {
+          "title": "Mostrar buscador",
+          "type": "boolean",
+          "default": true
+        },
+        "searchUrl": {
+          "title": "URL de búsqueda",
+          "type": "string",
+          "default": "/s"
+        },
+        "showAccount": {
+          "title": "Mostrar cuenta",
+          "type": "boolean",
+          "default": true
+        },
+        "accountUrl": {
+          "title": "URL de cuenta",
+          "type": "string",
+          "default": "/login"
+        },
+        "showCart": {
+          "title": "Mostrar carrito",
+          "type": "boolean",
+          "default": true
+        },
+        "highlightActiveLink": {
+          "title": "Resaltar categoría activa",
+          "type": "boolean",
+          "default": false,
+          "description": "Si está activo, resalta en color de marca el link cuya URL coincide con la página actual. Apagado por default."
+        },
+        "sticky": {
+          "title": "Fijo al hacer scroll (sticky)",
+          "type": "boolean",
+          "default": true
+        },
+        "enableBlur": {
+          "title": "Desenfoque de fondo (blur)",
+          "type": "boolean",
+          "default": true
+        },
+        "blurAmount": {
+          "title": "Intensidad del blur (px)",
+          "type": "number",
+          "default": 10,
+          "minimum": 0,
+          "maximum": 40
+        },
+        "background": {
+          "title": "Color de fondo",
+          "type": "string",
+          "default": "rgba(255, 255, 255, 0.92)",
+          "description": "Hex o rgba. Para el efecto translúcido usar rgba (ej: rgba(255,255,255,0.92))."
+        },
+        "brandColor": {
+          "title": "Color de marca (activo + badge)",
+          "type": "string",
+          "default": "#6D28F5",
+          "description": "Hex. Color del link activo, hover y el badge del carrito."
+        },
+        "linkColor": {
+          "title": "Color de los links",
+          "type": "string",
+          "default": "#3a3645"
+        },
+        "logoColor": {
+          "title": "Color del logo",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "iconColor": {
+          "title": "Color de los iconos",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "borderColor": {
+          "title": "Color del borde inferior",
+          "type": "string",
+          "default": "#ECEAF1"
+        },
+        "badgeTextColor": {
+          "title": "Color del texto del badge",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "logoFontFamily": {
+          "title": "Fuente del logo",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "linkFontFamily": {
+          "title": "Fuente de los links",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        },
+        "logoFontSize": {
+          "title": "Tamaño del logo",
+          "type": "string",
+          "default": "23px"
+        },
+        "logoLetterSpacing": {
+          "title": "Espaciado de letras del logo",
+          "type": "string",
+          "default": "0.14em"
+        },
+        "linkFontSize": {
+          "title": "Tamaño de los links",
+          "type": "string",
+          "default": "14.5px"
+        }
+      }
+    },
+    "PulseNewsletterBand": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseNewsletterBand",
+      "$componentTitle": "Pulse - NewsletterBand",
+      "title": "Pulse - NewsletterBand",
+      "description": "Banda full-bleed de captación de email con degradado de marca: titular, subtítulo e input pill con botón de suscripción. Estados vacío → focus → éxito (mensaje con check).",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "default": "Únete al Club PULSO"
+        },
+        "subtitle": {
+          "title": "Subtítulo",
+          "type": "string"
+        },
+        "placeholder": {
+          "title": "Placeholder del input",
+          "type": "string",
+          "default": "Tu email"
+        },
+        "buttonText": {
+          "title": "Texto del botón",
+          "type": "string",
+          "default": "Suscribir"
+        },
+        "loadingText": {
+          "title": "Texto mientras envía",
+          "type": "string",
+          "default": "Enviando..."
+        },
+        "successMessage": {
+          "title": "Mensaje de éxito",
+          "type": "string",
+          "default": "¡Listo! Revisa tu correo para confirmar."
+        },
+        "errorMessage": {
+          "title": "Mensaje de error",
+          "type": "string",
+          "default": "Hubo un error al suscribirte. Intentá nuevamente."
+        },
+        "showConsent": {
+          "title": "Mostrar checkbox de consentimiento",
+          "type": "boolean",
+          "default": true
+        },
+        "consentText": {
+          "title": "Texto de consentimiento",
+          "type": "string",
+          "default": "Acepto recibir comunicaciones comerciales."
+        },
+        "paddingY": {
+          "title": "Padding vertical (px)",
+          "type": "number",
+          "default": 64,
+          "minimum": 24,
+          "maximum": 140
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenido (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "inputMaxWidth": {
+          "title": "Ancho máximo del input (px)",
+          "type": "number",
+          "default": 440,
+          "minimum": 280,
+          "maximum": 720
+        },
+        "gradientStart": {
+          "title": "Degradado: inicio",
+          "type": "string",
+          "default": "#1c1430"
+        },
+        "gradientEnd": {
+          "title": "Degradado: fin",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "gradientAngle": {
+          "title": "Degradado: ángulo (deg)",
+          "type": "number",
+          "default": 120,
+          "minimum": 0,
+          "maximum": 360
+        },
+        "titleColor": {
+          "title": "Color del título",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "subtitleColor": {
+          "title": "Color del subtítulo",
+          "type": "string",
+          "default": "#d8d2e8"
+        },
+        "placeholderColor": {
+          "title": "Color del placeholder",
+          "type": "string",
+          "default": "#cabfe6"
+        },
+        "inputBg": {
+          "title": "Fondo del input",
+          "type": "string",
+          "default": "rgba(255, 255, 255, 0.12)"
+        },
+        "buttonBg": {
+          "title": "Botón: fondo (vacío)",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "buttonColor": {
+          "title": "Botón: color de texto",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "accentColor": {
+          "title": "Color de acento (botón con texto / éxito)",
+          "type": "string",
+          "default": "#D6FF3F"
+        },
+        "inputRadius": {
+          "title": "Radio del input (px)",
+          "type": "number",
+          "default": 32,
+          "minimum": 0,
+          "maximum": 48
+        },
+        "buttonRadius": {
+          "title": "Radio del botón (px)",
+          "type": "number",
+          "default": 26,
+          "minimum": 0,
+          "maximum": 48
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseProductAccordion": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseProductAccordion",
+      "$componentTitle": "Pulse - ProductAccordion",
+      "title": "Pulse - ProductAccordion",
+      "description": "Detalles del producto en acordeón (una sección abierta a la vez, signo +/−). La fila marcada como 'Usar descripción del producto' toma el texto del producto automáticamente; el resto se carga en el CMS.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "items": {
+          "title": "Filas del acordeón",
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "title": "Fila",
+            "type": "object",
+            "properties": {
+              "title": {
+                "title": "Título",
+                "type": "string"
+              },
+              "useProductDescription": {
+                "title": "Usar descripción del producto",
+                "type": "boolean",
+                "default": false
+              },
+              "content": {
+                "title": "Contenido (si no usa la descripción del producto)",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "maxWidth": {
+          "title": "Ancho máximo (px)",
+          "type": "number",
+          "default": 480,
+          "minimum": 320,
+          "maximum": 1200
+        },
+        "titleColor": {
+          "title": "Color del título de fila",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "signColor": {
+          "title": "Color del signo +/−",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "bodyColor": {
+          "title": "Color del cuerpo",
+          "type": "string",
+          "default": "#5b5667"
+        },
+        "borderColor": {
+          "title": "Color de los separadores",
+          "type": "string",
+          "default": "#ECEAF1"
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseProductShelf": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseProductShelf",
+      "$componentTitle": "Pulse - ProductShelf",
+      "title": "Pulse - ProductShelf",
+      "description": "Estantería de productos: cabecera (eyebrow + título + enlace 'Ver todo') y grid de ProductCards. Cada card tiene imagen/degradado, badge opcional, wishlist, nombre, categoría y precio (con descuento opcional). En mobile el shelf scrollea horizontal.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string",
+          "default": "FAVORITOS"
+        },
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "default": "Lo más vendido"
+        },
+        "viewAllText": {
+          "title": "Texto enlace 'Ver todo'",
+          "type": "string",
+          "default": "Ver todo →"
+        },
+        "viewAllUrl": {
+          "title": "URL 'Ver todo' (PLP)",
+          "type": "string",
+          "description": "Ej: /running"
+        },
+        "collection": {
+          "title": "Colección (ID de cluster VTEX)",
+          "type": "string",
+          "description": "Si se completa, la estantería trae productos reales de esa colección (facet productClusterIds). Si se deja vacío, usa la lista manual de abajo."
+        },
+        "sort": {
+          "title": "Orden (solo con colección)",
+          "type": "string",
+          "default": "orders_desc",
+          "enum": [
+            "orders_desc",
+            "release_desc",
+            "discount_desc",
+            "price_asc",
+            "price_desc",
+            "score_desc"
+          ],
+          "enumNames": [
+            "Más vendidos",
+            "Novedades",
+            "Mayor descuento",
+            "Precio: menor a mayor",
+            "Precio: mayor a menor",
+            "Relevancia"
+          ]
+        },
+        "numberOfItems": {
+          "title": "Cantidad de productos (solo con colección)",
+          "type": "number",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 12
+        },
+        "products": {
+          "title": "Productos (lista manual / fallback)",
+          "description": "Opcional. Solo se usa si la 'Colección' está vacía.",
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "title": "Producto",
+            "type": "object",
+            "properties": {
+              "name": {
+                "title": "Nombre",
+                "type": "string"
+              },
+              "category": {
+                "title": "Categoría",
+                "type": "string"
+              },
+              "price": {
+                "title": "Precio",
+                "type": "string",
+                "description": "Ej: 39,90 €"
+              },
+              "oldPrice": {
+                "title": "Precio anterior (opcional)",
+                "type": "string",
+                "description": "Tachado. Ej: 59,90 €"
+              },
+              "url": {
+                "title": "URL (PDP)",
+                "type": "string",
+                "description": "Ej: /camiseta-aero-run/p"
+              },
+              "badge": {
+                "title": "Badge (opcional)",
+                "type": "string",
+                "description": "Ej: Nuevo, -20%, Top ventas"
+              },
+              "badgeBg": {
+                "title": "Badge: fondo",
+                "type": "string",
+                "default": "#15131B"
+              },
+              "badgeColor": {
+                "title": "Badge: color de texto",
+                "type": "string",
+                "default": "#FFFFFF"
+              },
+              "gradientStart": {
+                "title": "Degradado de imagen: inicio",
+                "type": "string",
+                "default": "#ECE8F2"
+              },
+              "gradientEnd": {
+                "title": "Degradado de imagen: fin",
+                "type": "string",
+                "default": "#F6F4FA"
+              },
+              "image": {
+                "title": "Imagen del producto (opcional, reemplaza el degradado)",
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "title": "Imagen",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery"
+                    }
+                  },
+                  "alt": {
+                    "title": "Texto alternativo",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "showWishlist": {
+          "title": "Mostrar icono de wishlist",
+          "type": "boolean",
+          "default": true
+        },
+        "columns": {
+          "title": "Columnas (desktop)",
+          "type": "number",
+          "default": 4,
+          "minimum": 2,
+          "maximum": 6
+        },
+        "gap": {
+          "title": "Separación entre cards (px)",
+          "type": "number",
+          "default": 22,
+          "minimum": 8,
+          "maximum": 48
+        },
+        "imageRadius": {
+          "title": "Radio de imagen (px)",
+          "type": "number",
+          "default": 16,
+          "minimum": 0,
+          "maximum": 32
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenedor (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "paddingY": {
+          "title": "Padding vertical de la sección (px)",
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 120
+        },
+        "eyebrowColor": {
+          "title": "Color del eyebrow",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "titleColor": {
+          "title": "Color del título",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "accentColor": {
+          "title": "Color de acento ('Ver todo' + wishlist activo)",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "nameColor": {
+          "title": "Color del nombre",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "categoryColor": {
+          "title": "Color de la categoría",
+          "type": "string",
+          "default": "#8A8595"
+        },
+        "priceColor": {
+          "title": "Color del precio",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "oldPriceColor": {
+          "title": "Color del precio anterior",
+          "type": "string",
+          "default": "#B5B0BF"
+        },
+        "sectionBackground": {
+          "title": "Fondo de la sección",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulsePromoBanners": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulsePromoBanners",
+      "$componentTitle": "Pulse - PromoBanners",
+      "title": "Pulse - PromoBanners",
+      "description": "Banners promocionales en grid (1-3 por fila). Cada banner: eyebrow, titular (admite 2 líneas), CTA y fondo (degradado o imagen) con colores propios. En mobile apila en 1 columna.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "banners": {
+          "title": "Banners",
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "title": "Banner",
+            "type": "object",
+            "properties": {
+              "eyebrow": {
+                "title": "Eyebrow",
+                "type": "string"
+              },
+              "title": {
+                "title": "Titular",
+                "type": "string",
+                "description": "Usá un salto de línea para 2 líneas."
+              },
+              "ctaText": {
+                "title": "Texto del CTA",
+                "type": "string"
+              },
+              "ctaUrl": {
+                "title": "URL del CTA",
+                "type": "string",
+                "description": "Ej: /rebajas"
+              },
+              "gradientStart": {
+                "title": "Degradado: inicio",
+                "type": "string",
+                "default": "#15131B"
+              },
+              "gradientEnd": {
+                "title": "Degradado: fin",
+                "type": "string",
+                "default": "#3a2870"
+              },
+              "gradientAngle": {
+                "title": "Degradado: ángulo (deg)",
+                "type": "number",
+                "default": 120,
+                "minimum": 0,
+                "maximum": 360
+              },
+              "backgroundImage": {
+                "title": "Imagen de fondo (opcional, reemplaza el degradado)",
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "title": "Imagen",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery"
+                    }
+                  },
+                  "alt": {
+                    "title": "Texto alternativo",
+                    "type": "string"
+                  }
+                }
+              },
+              "eyebrowColor": {
+                "title": "Color del eyebrow",
+                "type": "string",
+                "default": "#D6FF3F"
+              },
+              "titleColor": {
+                "title": "Color del titular",
+                "type": "string",
+                "default": "#FFFFFF"
+              },
+              "ctaBg": {
+                "title": "CTA: fondo",
+                "type": "string",
+                "default": "#FFFFFF"
+              },
+              "ctaColor": {
+                "title": "CTA: color de texto",
+                "type": "string",
+                "default": "#15131B"
+              }
+            }
+          }
+        },
+        "columns": {
+          "title": "Columnas (desktop)",
+          "type": "number",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 3
+        },
+        "gap": {
+          "title": "Separación entre banners (px)",
+          "type": "number",
+          "default": 20,
+          "minimum": 0,
+          "maximum": 48
+        },
+        "minHeight": {
+          "title": "Alto mínimo (px)",
+          "type": "number",
+          "default": 260,
+          "minimum": 140,
+          "maximum": 480
+        },
+        "radius": {
+          "title": "Radio del banner (px)",
+          "type": "number",
+          "default": 22,
+          "minimum": 0,
+          "maximum": 40
+        },
+        "ctaRadius": {
+          "title": "Radio del CTA (px)",
+          "type": "number",
+          "default": 26,
+          "minimum": 0,
+          "maximum": 60
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenedor (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "paddingY": {
+          "title": "Padding vertical de la sección (px)",
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 120
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "PulseValueProps": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PulseValueProps",
+      "$componentTitle": "Pulse - ValueProps",
+      "title": "Pulse - ValueProps",
+      "description": "Tira de garantías / propuestas de valor. Ítems con icono lineal (de un set predefinido), título y subtítulo. Grid en desktop, stack en mobile, delimitada por borde inferior.",
+      "type": "object",
+      "properties": {
+        "showComponent": {
+          "title": "Mostrar sección",
+          "type": "boolean",
+          "default": true
+        },
+        "items": {
+          "title": "Ítems",
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "title": "Ítem",
+            "type": "object",
+            "properties": {
+              "icon": {
+                "title": "Icono",
+                "type": "string",
+                "default": "shipping",
+                "enum": [
+                  "shipping",
+                  "returns",
+                  "secure",
+                  "support",
+                  "quality",
+                  "payment"
+                ],
+                "enumNames": [
+                  "Envío",
+                  "Devoluciones",
+                  "Pago seguro",
+                  "Soporte",
+                  "Calidad",
+                  "Medios de pago"
+                ]
+              },
+              "title": {
+                "title": "Título",
+                "type": "string"
+              },
+              "subtitle": {
+                "title": "Subtítulo",
+                "type": "string"
+              },
+              "url": {
+                "title": "Enlace (opcional)",
+                "type": "string",
+                "description": "Ej: /envios"
+              }
+            }
+          }
+        },
+        "columns": {
+          "title": "Columnas (desktop)",
+          "type": "number",
+          "default": 3,
+          "minimum": 2,
+          "maximum": 4
+        },
+        "gap": {
+          "title": "Separación entre columnas (px)",
+          "type": "number",
+          "default": 30,
+          "minimum": 12,
+          "maximum": 64
+        },
+        "paddingY": {
+          "title": "Padding vertical (px)",
+          "type": "number",
+          "default": 44,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxWidth": {
+          "title": "Ancho máximo del contenedor (px)",
+          "type": "number",
+          "default": 1280,
+          "minimum": 600,
+          "maximum": 1600
+        },
+        "showBorder": {
+          "title": "Mostrar borde inferior",
+          "type": "boolean",
+          "default": true
+        },
+        "iconColor": {
+          "title": "Color de los iconos",
+          "type": "string",
+          "default": "#6D28F5"
+        },
+        "titleColor": {
+          "title": "Color del título",
+          "type": "string",
+          "default": "#15131B"
+        },
+        "subtitleColor": {
+          "title": "Color del subtítulo",
+          "type": "string",
+          "default": "#8A8595"
+        },
+        "borderColor": {
+          "title": "Color del borde inferior",
+          "type": "string",
+          "default": "#ECEAF1"
+        },
+        "sectionBackground": {
+          "title": "Fondo de la sección",
+          "type": "string",
+          "default": "#FFFFFF"
+        },
+        "titleFontFamily": {
+          "title": "Fuente de títulos",
+          "type": "string",
+          "default": "'Schibsted Grotesk', sans-serif"
+        },
+        "bodyFontFamily": {
+          "title": "Fuente del cuerpo",
+          "type": "string",
+          "default": "'Hanken Grotesk', sans-serif"
+        }
+      }
+    },
+    "SkuOptionColors": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "SkuOptionColors",
+      "$componentTitle": "SKU - Colores de variante",
+      "title": "SKU - Colores de variante",
+      "description": "Mapa global de nombres de color a valores hex para pintar los swatches del selector de SKU. No renderiza HTML. Agregar una sola vez (global o en la PDP). El nombre del color debe coincidir exactamente con el valor que entrega VTEX en availableVariations.",
+      "type": "object",
+      "properties": {
+        "colors": {
+          "type": "array",
+          "title": "Colores",
+          "items": {
+            "type": "object",
+            "title": "Color",
+            "required": [
+              "colorName",
+              "value"
+            ],
+            "properties": {
+              "colorName": {
+                "type": "string",
+                "title": "Nombre del color",
+                "description": "Debe coincidir exactamente con el nombre de la variante en VTEX (ej. \"Azul Marino\")."
+              },
+              "value": {
+                "type": "string",
+                "title": "Valor hex",
+                "description": "Color en formato hexadecimal. Ejemplo: #101418."
+              },
+              "isMetallic": {
+                "type": "boolean",
+                "title": "Efecto metálico",
+                "default": false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {},
+  "content-types": {}
+}
