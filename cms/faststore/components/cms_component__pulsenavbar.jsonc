@@ -47,7 +47,49 @@
         "type": "object",
         "properties": {
           "label": { "title": "Texto", "type": "string" },
-          "url": { "title": "URL", "type": "string", "description": "Ej: /running" }
+          "url": { "title": "URL", "type": "string", "description": "Ej: /hombre" },
+          "subcategories": {
+            "title": "Subcategorías (mega-menú)",
+            "type": "array",
+            "maxItems": 12,
+            "description": "Si tiene subcategorías, al pasar el mouse se abre el mega-menú. Ej: Hombre → Camisetas, Shorts, Ver todo.",
+            "items": {
+              "title": "Subcategoría",
+              "type": "object",
+              "properties": {
+                "label": { "title": "Texto", "type": "string" },
+                "url": { "title": "URL", "type": "string" },
+                "bold": { "title": "Destacar (ej. 'Ver todo')", "type": "boolean", "default": false }
+              }
+            }
+          },
+          "promos": {
+            "title": "Banners promocionales del mega-menú (máx 2)",
+            "type": "array",
+            "maxItems": 2,
+            "items": {
+              "title": "Banner",
+              "type": "object",
+              "properties": {
+                "eyebrow": { "title": "Eyebrow", "type": "string" },
+                "title": { "title": "Título", "type": "string" },
+                "url": { "title": "URL", "type": "string" },
+                "image": {
+                  "title": "Imagen de fondo (opcional, reemplaza el degradado)",
+                  "type": "object",
+                  "properties": {
+                    "src": { "title": "Imagen", "type": "string", "widget": { "ui:widget": "media-gallery" } },
+                    "alt": { "title": "Texto alternativo", "type": "string" }
+                  }
+                },
+                "gradientStart": { "title": "Degradado: inicio", "type": "string", "default": "#15131B" },
+                "gradientEnd": { "title": "Degradado: fin", "type": "string", "default": "#3a2870" },
+                "gradientAngle": { "title": "Degradado: ángulo (deg)", "type": "number", "default": 135, "minimum": 0, "maximum": 360 },
+                "accentColor": { "title": "Color del eyebrow", "type": "string", "default": "#D6FF3F" },
+                "inkColor": { "title": "Color del título", "type": "string", "default": "#FFFFFF" }
+              }
+            }
+          }
         }
       }
     },

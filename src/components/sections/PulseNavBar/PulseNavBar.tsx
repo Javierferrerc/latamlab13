@@ -1,15 +1,29 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
 
 // Carrito nativo: contador real + abre/cierra el CartDrawer (CartSidebar).
 import { useCartToggleButton } from "src/sdk/cart/useCartToggleButton"
 
-import type { PulseNavBarProps } from "./PulseNavBar.types"
+import type { PulseNavBarProps, PulseNavPromo } from "./PulseNavBar.types"
 import { DEFAULTS, DEFAULT_NAV_LINKS } from "./PulseNavBar.constants"
 import styles from "./pulse-nav-bar.module.scss"
+
+const promoBackground = (p: PulseNavPromo): React.CSSProperties => {
+  if (p.image?.src) {
+    return {
+      backgroundImage: `url(${p.image.src})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }
+  }
+  const angle = p.gradientAngle ?? 135
+  return {
+    background: `linear-gradient(${angle}deg, ${p.gradientStart ?? "#15131B"}, ${p.gradientEnd ?? "#3a2870"})`,
+  }
+}
 
 const SearchIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
@@ -72,6 +86,11 @@ const PulseNavBar = ({
   const cartBtn = useCartToggleButton()
   const cartCount = Number(cartBtn["data-items"]) || 0
   const [menuOpen, setMenuOpen] = useState(false)
+  const [openCat, setOpenCat] = useState<number | null>(null)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchPinned, setSearchPinned] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("")
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   if (showComponent === false) return null
 
@@ -99,6 +118,24 @@ const PulseNavBar = ({
     "--pulse-nav-link-size": linkFontSize,
   } as React.CSSProperties
 
+  const activeLink = openCat != null ? links[openCat] : null
+  const panelSubs = activeLink?.subcategories ?? []
+  const panelPromos = activeLink?.promos ?? []
+  const showPanel = activeLink != null && (panelSubs.length > 0 || panelPromos.length > 0)
+  const hasPanel = (link: (typeof links)[number]) =>
+    (link.subcategories?.length ?? 0) > 0 || (link.promos?.length ?? 0) > 0
+
+  const searchActive = searchOpen || searchPinned
+  const onSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const q = searchTerm.trim()
+    if (!q) {
+      searchInputRef.current?.focus()
+      return
+    }
+    router.push(`${searchUrl}?q=${encodeURIComponent(q)}`)
+  }
+
   const Logo = (
     <a href={logoUrl} className={styles.logo} aria-label={logoText}>
       {logoImage?.src ? (
@@ -121,6 +158,7 @@ const PulseNavBar = ({
       className={styles.header}
       style={cssVars}
       data-sticky={sticky ? "true" : "false"}
+      onMouseLeave={() => setOpenCat(null)}
     >
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -153,6 +191,10 @@ const PulseNavBar = ({
               href={link.url ?? "#"}
               className={styles.navLink}
               data-active={isActive(link.url) ? "true" : "false"}
+              data-open={openCat === i ? "true" : "false"}
+              onMouseEnter={() => setOpenCat(hasPanel(link) ? i : null)}
+              aria-haspopup={hasPanel(link) ? "true" : undefined}
+              aria-expanded={openCat === i ? "true" : undefined}
             >
               {link.label}
             </a>
@@ -161,9 +203,40 @@ const PulseNavBar = ({
 
         <div className={styles.utilities}>
           {showSearch && (
-            <a href={searchUrl} className={styles.iconBtn} aria-label="Buscar">
-              <SearchIcon />
-            </a>
+            <>
+              <div
+                className={`${styles.search} ${styles.desktopOnly}`}
+                data-open={searchActive ? "true" : "false"}
+                onMouseEnter={() => setSearchOpen(true)}
+                onMouseLeave={() => setSearchOpen(false)}
+                onClick={() => searchInputRef.current?.focus()}
+              >
+                <form className={styles.searchPill} onSubmit={onSearchSubmit} role="search">
+                  <input
+                    ref={searchInputRef}
+                    type="search"
+                    className={styles.searchInput}
+                    placeholder="¿Qué buscas?"
+                    aria-label="Buscar"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onFocus={() => setSearchPinned(true)}
+                    onBlur={() => setSearchPinned(false)}
+                    tabIndex={searchActive ? 0 : -1}
+                  />
+                  <button type="submit" className={styles.searchBtn} aria-label="Buscar">
+                    <SearchIcon />
+                  </button>
+                </form>
+              </div>
+              <a
+                href={searchUrl}
+                className={`${styles.iconBtn} ${styles.mobileOnly}`}
+                aria-label="Buscar"
+              >
+                <SearchIcon />
+              </a>
+            </>
           )}
           {showAccount && (
             <a href={accountUrl} className={`${styles.iconBtn} ${styles.desktopOnly}`} aria-label="Mi cuenta">
@@ -173,6 +246,59 @@ const PulseNavBar = ({
           {Cart}
         </div>
       </div>
+
+      {/* Desktop mega-menu panel (hover) */}
+      {showPanel && (
+        <div className={styles.megaPanel}>
+          <div
+            className={styles.megaInner}
+            data-cols={panelPromos.length > 0 ? "two" : "one"}
+          >
+            {panelSubs.length > 0 && (
+              <div className={styles.megaCol}>
+                <div className={styles.megaTitle}>{activeLink?.label}</div>
+                <div className={styles.megaLinks}>
+                  {panelSubs.map((s, si) => (
+                    <a
+                      key={`${s.url ?? s.label ?? si}`}
+                      href={s.url ?? "#"}
+                      className={styles.megaLink}
+                      data-bold={s.bold ? "true" : "false"}
+                    >
+                      {s.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+            {panelPromos.length > 0 && (
+              <div className={styles.megaPromos}>
+                {panelPromos.map((p, pi) => (
+                  <a
+                    key={`${p.url ?? p.title ?? pi}`}
+                    href={p.url ?? "#"}
+                    className={styles.megaPromo}
+                    style={promoBackground(p)}
+                  >
+                    <div>
+                      {p.eyebrow && (
+                        <div className={styles.promoEyebrow} style={{ color: p.accentColor }}>
+                          {p.eyebrow}
+                        </div>
+                      )}
+                      {p.title && (
+                        <div className={styles.promoTitle} style={{ color: p.inkColor }}>
+                          {p.title}
+                        </div>
+                      )}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Mobile slide-in menu */}
       {menuOpen && (
@@ -185,15 +311,30 @@ const PulseNavBar = ({
           </div>
           <nav className={styles.mobileNav} aria-label="Categorías">
             {links.map((link, i) => (
-              <a
-                key={`m-${link.url ?? link.label ?? i}`}
-                href={link.url ?? "#"}
-                className={styles.mobileNavLink}
-                data-active={isActive(link.url) ? "true" : "false"}
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.label}
-              </a>
+              <div key={`m-${link.url ?? link.label ?? i}`} className={styles.mobileGroup}>
+                <a
+                  href={link.url ?? "#"}
+                  className={styles.mobileNavLink}
+                  data-active={isActive(link.url) ? "true" : "false"}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+                {(link.subcategories?.length ?? 0) > 0 && (
+                  <div className={styles.mobileSubs}>
+                    {link.subcategories!.map((s, si) => (
+                      <a
+                        key={`ms-${s.url ?? s.label ?? si}`}
+                        href={s.url ?? "#"}
+                        className={styles.mobileSubLink}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {s.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
             {showAccount && (
               <a href={accountUrl} className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
